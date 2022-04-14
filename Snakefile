@@ -11,67 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-## process 16 Anopheles genomes data
-rule extract_ag16g_zipfile:
-    input:
-        ag16g="data/raw_data/doi_10.5061_dryad.f4114__v1.zip"
-    output:
-        vcf_tar_file="data/raw_data/VCFfile4DRYAD.tar.gz"
-    threads:
-        1
-    shell:
-        "unzip -d data/raw_data {input.ag16g} VCFfile4DRYAD.tar.gz"
-
-rule extract_ag16g_tarfile:
-    input:
-        tar_file="data/raw_data/VCFfile4DRYAD.tar.gz"
-    output:
-        vcf_files=expand("data/raw_data/VCFfile4DRYAD/AGC_refHC_bialSNP_AC2_2DPGQ.{chrom}_V2.CHRcode2.DRYAD.vcf.gz", chrom=["2L", "2R", "3L"])
-    threads:
-        1
-    shell:
-        "tar -C data/raw_data -xzvf {input.tar_file}"
-
-rule filter_ag16g_vcf:
-    input:
-        vcf="data/raw_data/VCFfile4DRYAD/AGC_refHC_bialSNP_AC2_2DPGQ.{chrom}_V2.CHRcode2.DRYAD.vcf.gz"
-    output:
-        vcf="data/ag16g/ag16g_{chrom}_gambiae_coluzzii.vcf.gz"
-    threads:
-        1
-    shell:
-        "vcftools --gzvcf {input.vcf} --recode --stdout --keep sample_lists/ag16g_gambiae_coluzzii_ids.txt --remove-indels --maf 0.01 | gzip -c > {output.vcf}"
-
-rule ag16g_to_bed:
-    input:
-        vcf="data/ag16g/ag16g_{chrom}.vcf.gz"
-    output:
-        bed="data/ag16g/ag16g_{chrom}.bed"
-    threads:
-        1
-    shell:
-        "plink1.9 --vcf {input.vcf} --make-bed --allow-extra-chr --out data/ag16g/ag16g_{wildcards.chrom}"
-
-rule ag16g_to_raw:
-    input:
-        bed="data/ag16g/ag16g_{chrom}.bed"
-    output:
-        raw="data/ag16g/ag16g_{chrom}.raw"
-    threads:
-        1
-    shell:
-        "plink1.9 --bfile data/ag16g/ag16g_{wildcards.chrom} --recode A --allow-extra-chr --out data/ag16g/ag16g_{wildcards.chrom}"
-
-rule ag16g_to_inveRsion:
-    input:
-        raw="data/ag16g/ag16g_{chrom}.raw"
-    output:
-        inveRsion="data/ag16g/ag16g_{chrom}.inveRsion"
-    threads:
-        1
-    shell:
-        "scripts/raw_to_inveRsion --input-raw {input.raw} --output-txt {output.inveRsion}"
         
 ## process Drosophila Genetics Reference Panel v2 VCFs
 rule filter_dgrp2_vcf:
@@ -189,8 +128,7 @@ rule ag1000g_to_inveRsion:
 rule check_inputs:
     input:
         dgrp="data/raw_data/dgrp2.vcf",
-        ag1000g=expand("data/raw_data/ag1000g.phase1.ar3.pass.biallelic.{chrom}.vcf.gz", chrom=["2L", "3L", "2R"]),
-        ag16g="data/raw_data/doi_10.5061_dryad.f4114__v1.zip"
+        ag1000g=expand("data/raw_data/ag1000g.phase1.ar3.pass.biallelic.{chrom}.vcf.gz", chrom=["2L", "3L", "2R"])
 
 rule prepare_dgrp2:
     input:
@@ -201,7 +139,3 @@ rule prepare_ag1000g:
         ag1000g_bfaso=expand("data/ag1000g/ag1000g_{chrom}_bfaso.{format}", format=["bed", "raw", "vcf.gz"], chrom=["2L", "2R", "3L"]),
         ag1000g_bfaso_gambiae=expand("data/ag1000g/ag1000g_{chrom}_bfaso_gambiae.{format}", chrom=["2L", "2R", "3L"], format=["bed", "raw", "vcf.gz", "inveRsion"]),
         ag1000g_bfaso_coluzii=expand("data/ag1000g/ag1000g_{chrom}_bfaso_coluzzii.{format}", chrom=["2L", "2R", "3L"], format=["bed", "raw", "vcf.gz", "inveRsion"])
-        
-rule prepare_ag16g:
-    input:
-        ag16g=expand("data/ag16g/ag16g_{chrom}_gambiae_coluzzii.{format}", chrom=["2L", "2R", "3L"], format=["bed", "raw", "vcf.gz", "inveRsion"])
