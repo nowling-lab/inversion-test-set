@@ -172,6 +172,33 @@ rule split_pet_by_chrom:
         1
     shell:
         "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --recode --stdout | gzip -c > {output.chrom_vcf}"
+
+## Process blue tit (Cyanistes caeruleus) data
+cyanistes_inv_chromosomes = ["chromo.03"]
+
+rule split_cyanistes_by_chrom:
+    input:
+        vcf="data/raw_data/BLUE2020VCF.vcf.gz"
+    output:
+        chrom_vcf="data/cyanistes/cyanistes_{chrom}.vcf.gz"
+    threads:
+        1
+    shell:
+        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --recode --stdout | gzip -c > {output.chrom_vcf}"
+
+## Process peach (Prunus persica) data
+prunus_inv_chromosomes = ["Pp06"]
+
+rule split_prunus_by_chrom:
+    input:
+        vcf="data/raw_data/SNP.vcf.gz"
+    output:
+        chrom_vcf="data/prunus/prunus_{chrom}.vcf.gz"
+    threads:
+        1
+    shell:
+        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --recode --stdout | gzip -c > {output.chrom_vcf}"
+
         
 ## Top-level rules
 rule prepare_dgrp2:
@@ -191,3 +218,11 @@ rule prepare_annuus:
 rule prepare_petiolaris:
     input:
         pet_by_chrom=expand("data/petiolaris/petiolaris_gwas_{chrom}.vcf.gz", chrom=pet_inv_chromosomes)
+
+rule prepare_cyanistes:
+    input:
+        cyanistes_by_chrom=expand("data/cyanistes/cyanistes_{chrom}.vcf.gz", chrom=cyanistes_inv_chromosomes)
+
+rule prepare_prunus:
+    input:
+        prunus_by_chrom=expand("data/prunus/prunus_{chrom}.vcf.gz", chrom=prunus_inv_chromosomes

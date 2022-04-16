@@ -8,6 +8,8 @@ You will need to download:
 * The `dgrp2.vcf` VCF file from the [Drosophila Genetics Reference Panel v2](http://dgrp2.gnets.ncsu.edu/data.html)
 * The biallelic 3L, 2R, and 2L VCF files from the FTP site for the 1000 Anopheles Genomes project phase 1 AR3 data release (ftp://ngs.sanger.ac.uk/production/ag1000g/phase1/AR3/variation/main/vcf/).  These files are named: ag1000g.phase1.ar3.pass.biallelic.{chrom}.vcf.gz where chrom is 3L, 2R, or 2L.
 * The `Annuus.ann_env.tranche90_snps_bi_AN50_AF99.vcf.gz` and `Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz` files from the [UBC Sunflower Genome project](https://rieseberglab.github.io/ubc-sunflower-genome/)
+* The file `SNP.vcf.gz` from [Figshare](https://figshare.com/articles/dataset/SNP_SV_and_scripts_for_RYP1_genome_paper/12937340/1)
+* The file `BLUE2020VCF.vcf.gz` from [Dryad](https://datadryad.org/stash/dataset/doi:10.5061/dryad.x69p8czfg)
 
 Place this files in the directory `data/raw_data`.  The directory contains an empty file named `PLACE_INPUT_FILES_HERE`.
 
@@ -24,6 +26,8 @@ $ snakemake prepare_ag1000g
 $ snakemake prepare_dgrp2
 $ snakemake prepare_annuus
 $ snakemake prepare_petiolaris
+$ snakemake prepare_cyanistes
+$ snakameke prepare_prunus
 ```
 
 Each task is assigned one thread.  If you want to run multiple tasks concurrently, use Snakemake's `--cores` flag:
@@ -58,8 +62,11 @@ The data constitute three test cases:
   * Ag1000 2R: 150 _Anopheles gambiae_ and _coluzzii_ samples from a single geographic area (Burkina Faso) with a combination of the 2Rb and 2Rbc inversions.
 * Other positives:
   * Helianthus petiolaris (sunflowers): Todesco, et al. found inversions on chromosomes 5, 9, 11, and 17 (see extended figures 6 and 7).  We are able to detect the pet17.03 inversion but not the pet17.01 inversion with Asaph.  Due to population structure, the inversions tend to show up on PCs 3 and 4.  We haven't done enough analysis on the data yet to identify and separate the samples by population to improve clarity of the inversion detection.
+  * Prunus persica (peach): Guan, et al. found a 1.67 Mb inversion on chromosome Pp06.  This is not currently detectable by Asaph (too small).  We do not have genotype labels.
+  * Cyanistes caeruleus (Blue tit): Perrier, et al. found a 2.8 Mb inversion on chromosome 3. This is not currently detectable by Asaph (too small).  We do not have genotype\
+   labels.
 * Other:
-  * Helianthus annuus (sunflowers): Processing of these data from Todesco, et al. are supported but have not been analyzed yet.  No labels are provided.
+  * Helianthus annuus (sunflowers): Processing of these data from Todesco, et al. are supported, but we have not been analyzed yet.  No labels are provided.
 
 Inversion genotype labels are provided under the `sample_labels` directory.
 
@@ -71,6 +78,8 @@ If you use this data set, please cite the original papers from which the data ar
 * **Drosophila Genetics Reference Panel**: Mackay, T., Richards, S., Stone, E., et al. [The Drosophila melanogaster Genetic Reference Panel.](https://doi.org/10.1038/nature10811) Nature 482, 173–178 (2012).
 * **Drosophila Genetics Reference Panel**: Huang, W., Massouras, A., Inoue, Y., et al. [Natural variation in genome architecture among 205 Drosophila melanogaster Genetic Reference Panel lines.](https://doi.org/10.1101/gr.171546.113) Genome Research 24:1193-1208 (2014).
 * **UBC Sunflower Genome project**: Todesco, et al. [Massive haplotypes underlie ecotypic differentiation in sunflowers](https://www.nature.com/articles/s41586-020-2467-6) Nature (2020).
+* **Peach**: Guan, et al. [Genome structure variation analyses of peach reveal population dynamics and a 1.67 Mb causal inversion for fruit shape](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-02239-1) (2021)
+* **Blue tit**: Perrier, et al. [Demographic history and genomics of local adaptation in blue tit populations](https://onlinelibrary.wiley.com/doi/10.1111/eva.13035) (2020).
 
 and our paper describing the data set:
 
