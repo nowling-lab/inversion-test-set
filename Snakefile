@@ -150,18 +150,9 @@ annuus_inv_chromosomes = ["Ha412HOChr01",
                           "Ha412HOChr17"]
 
 # from https://github.com/owensgl/wild_gwas_2018/blob/master/MDS_outliers/Ha412HO/petiolaris/Ha412HO_inv.v3.pcasites.vcf
-pet_inv_chromosomes = ["Ha412HOChr01",
-                       "Ha412HOChr05",
-                       "Ha412HOChr06",
-                       "Ha412HOChr07",
-                       "Ha412HOChr08",
+pet_inv_chromosomes = ["Ha412HOChr05",
                        "Ha412HOChr09",
-                       "Ha412HOChr10",
                        "Ha412HOChr11",
-                       "Ha412HOChr12",
-                       "Ha412HOChr13",
-                       "Ha412HOChr14",
-                       "Ha412HOChr16",
                        "Ha412HOChr17"]
 
 
@@ -173,8 +164,10 @@ rule split_annuus_by_chrom:
     threads:
         1
     shell:
-        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --recode --stdout | gzip -c > {output.chrom_vcf}"
+        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --maf 0.01 --recode --stdout | gzip -c > {output.chrom_vcf}"
 
+# PET0628 shows up as an outlier in PCA.  Todesco, et al. 2020 Suppl. Table 1 indicates that only 17.62%
+# of the reads aligned to the genome (compared with > 90% for the other samples).
 rule split_pet_by_chrom:
     input:
         vcf="data/raw_data/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz"
@@ -183,7 +176,7 @@ rule split_pet_by_chrom:
     threads:
         1
     shell:
-        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --recode --stdout | gzip -c > {output.chrom_vcf}"
+        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --maf 0.01 --remove-indv PET0628 --recode --stdout | gzip -c > {output.chrom_vcf}"
 
 ## Process blue tit (Cyanistes caeruleus) data
 cyanistes_inv_chromosomes = ["chromo.03"]
