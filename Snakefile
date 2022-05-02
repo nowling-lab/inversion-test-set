@@ -11,7 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-        
+
+configfile: "config.yaml"
+
 ## process Drosophila Genetics Reference Panel v2 VCFs
 rule filter_dgrp2_vcf:
     input:
@@ -32,6 +34,16 @@ rule split_dgrp2_by_chrom:
         1
     shell:
         "vcftools --vcf {input.vcf} --chr {wildcards.chrom} --recode --stdout > {output.chrom_vcf}"
+
+rule dgrp2_to_vcf_gz:
+    input:
+        vcf="data/dgrp2/dgrp2_{chrom}.biallelic.vcf"
+    output:
+        vcfgz="data/dgrp2/dgrp2_{chrom}.biallelic.vcf.gz"
+    threads:
+        1
+    shell:
+        "gzip -k {input.vcf}"
 
 rule dgrp2_to_bed:
     input:
@@ -203,26 +215,38 @@ rule split_prunus_by_chrom:
 ## Top-level rules
 rule prepare_dgrp2:
     input:
-        dgrp=expand("data/dgrp2/dgrp2_{chrom}.biallelic.{format}", chrom=["2L", "2R", "3R", "3L"], format=["bed", "raw", "vcf", "inveRsion"])
+        dgrp=expand("data/dgrp2/dgrp2_{chrom}.biallelic.{format}",
+                    chrom=["2L", "2R", "3R", "3L"],
+                    format=config["formats"])
 
 rule prepare_ag1000g:
     input:
-        ag1000g_bfaso=expand("data/ag1000g/ag1000g_{chrom}_bfaso.{format}", format=["bed", "raw", "vcf.gz"], chrom=["2L", "2R", "3L"]),
-        ag1000g_bfaso_gambiae=expand("data/ag1000g/ag1000g_{chrom}_bfaso_gambiae.{format}", chrom=["2L", "2R", "3L"], format=["bed", "raw", "vcf.gz", "inveRsion"]),
-        ag1000g_bfaso_coluzii=expand("data/ag1000g/ag1000g_{chrom}_bfaso_coluzzii.{format}", chrom=["2L", "2R", "3L"], format=["bed", "raw", "vcf.gz", "inveRsion"])
+        ag1000g_bfaso=expand("data/ag1000g/ag1000g_{chrom}_bfaso.{format}",
+                             chrom=["2L", "2R", "3L"],
+                             format=config["formats"]),
+        ag1000g_bfaso_gambiae=expand("data/ag1000g/ag1000g_{chrom}_bfaso_gambiae.{format}",
+                                     chrom=["2L", "2R", "3L"],
+                                     format=config["formats"]),
+        ag1000g_bfaso_coluzii=expand("data/ag1000g/ag1000g_{chrom}_bfaso_coluzzii.{format}",
+                                     chrom=["2L", "2R", "3L"],
+                                     format=config["formats"])
 
 rule prepare_annuus:
     input:
-        annuus_by_chrom=expand("data/annuus/annuus_env_{chrom}.vcf.gz", chrom=annuus_inv_chromosomes)
+        annuus_by_chrom=expand("data/annuus/annuus_env_{chrom}.vcf.gz",
+                               chrom=annuus_inv_chromosomes)
 
 rule prepare_petiolaris:
     input:
-        pet_by_chrom=expand("data/petiolaris/petiolaris_gwas_{chrom}.vcf.gz", chrom=pet_inv_chromosomes)
+        pet_by_chrom=expand("data/petiolaris/petiolaris_gwas_{chrom}.vcf.gz",
+                            chrom=pet_inv_chromosomes)
 
 rule prepare_cyanistes:
     input:
-        cyanistes_by_chrom=expand("data/cyanistes/cyanistes_{chrom}.vcf.gz", chrom=cyanistes_inv_chromosomes)
+        cyanistes_by_chrom=expand("data/cyanistes/cyanistes_{chrom}.vcf.gz",
+                                  chrom=cyanistes_inv_chromosomes)
 
 rule prepare_prunus:
     input:
-        prunus_by_chrom=expand("data/prunus/prunus_{chrom}.vcf.gz", chrom=prunus_inv_chromosomes
+        prunus_by_chrom=expand("data/prunus/prunus_{chrom}.vcf.gz",
+                               chrom=prunus_inv_chromosomes)
