@@ -5,7 +5,7 @@ We composed a benchmark data set for evaluating SNP-based inversion detection me
 ## Overview of Data Sets
 
 | Source | Group | Samples | Inversion | Genotype Labels Included | Allele Freq. | Genotype Freq. | Inversion Boundaries Included | Size (Mb, %) |
-| ------ | ----- | ------- | --------- | ------------------------ | ------------ | -------------- | ----------------------------- | |
+| ------ | ----- | ------- | --------- | ------------------------ | ------------ | -------------- | ----------------------------- | ------------ |
 | Ag1000g | An. gambaie and coluzzii, B. Faso | 150 | 2La | Yes | 94.7% | | Yes | 21.6 Mb |
 | Ag1000g | An. gambaie and coluzzii, B. Faso | 150 | 2Rb | Yes | 59.3% | | Yes | 7.55 Mb |
 | Ag1000g | An. gambaie, B. Faso | 81 | 2La | Yes | 90.7% | | Yes | 21.6 Mb |
