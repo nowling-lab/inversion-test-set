@@ -17,7 +17,7 @@ configfile: "config.yaml"
 ## process Drosophila Genetics Reference Panel v2 VCFs
 rule filter_dgrp2_vcf:
     input:
-        vcf="data/raw_data/dgrp2.vcf"
+        vcf="input_files/dgrp2.vcf"
     output:
         filtered_vcf="data/dgrp2/dgrp2.biallelic.vcf"
     threads:
@@ -78,7 +78,7 @@ rule dgrp2_to_inveRsion:
 ## Process 1000 Anopheles Genomes VCFs
 rule select_ag1000g_samples:
     input:
-        vcf="data/raw_data/ag1000g.phase1.ar3.pass.biallelic.{chrom}.vcf.gz"
+        vcf="input_files/ag1000g.phase1.ar3.pass.biallelic.{chrom}.vcf.gz"
     output:
         vcf="data/ag1000g/ag1000g_{chrom}_bfaso.vcf.gz"
     threads:
@@ -158,7 +158,7 @@ pet_inv_chromosomes = ["Ha412HOChr05",
 
 rule split_annuus_by_chrom:
     input:
-        vcf="data/raw_data/Annuus.ann_env.tranche90_snps_bi_AN50_AF99.vcf.gz"
+        vcf="input_files/Annuus.ann_env.tranche90_snps_bi_AN50_AF99.vcf.gz"
     output:
         chrom_vcf="data/annuus/annuus_env_{chrom}.vcf.gz"
     threads:
@@ -168,7 +168,7 @@ rule split_annuus_by_chrom:
 
 rule split_pet_by_chrom:
     input:
-        vcf="data/raw_data/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz"
+        vcf="input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz"
     params:
         exclusions=lambda w: " ".join(["--remove-indv {}".format(name) for name in config["pet_exclusions"]])
     output:
@@ -180,7 +180,7 @@ rule split_pet_by_chrom:
 
 rule split_pet_pet_by_chrom:
     input:
-        vcf="data/raw_data/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz"
+        vcf="input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz"
     params:
         exclusions=lambda w: " ".join(["--remove-indv {}".format(name) for name in config["pet_exclusions"]])
     output:
@@ -192,7 +192,7 @@ rule split_pet_pet_by_chrom:
 
 rule split_pet_fallax_by_chrom:
     input:
-        vcf="data/raw_data/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz"
+        vcf="input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz"
     params:
         exclusions=lambda w: " ".join(["--remove-indv {}".format(name) for name in config["pet_exclusions"]])
     output:
@@ -207,7 +207,7 @@ cyanistes_inv_chromosomes = ["chromo.03"]
 
 rule split_cyanistes_by_chrom:
     input:
-        vcf="data/raw_data/BLUE2020VCF.vcf.gz"
+        vcf="input_files/BLUE2020VCF.vcf.gz"
     output:
         chrom_vcf="data/cyanistes/cyanistes_{chrom}.vcf.gz"
     threads:
@@ -220,7 +220,7 @@ prunus_inv_chromosomes = ["Pp06"]
 
 rule split_prunus_by_chrom:
     input:
-        vcf="data/raw_data/SNP.vcf.gz"
+        vcf="input_files/SNP.vcf.gz"
     output:
         chrom_vcf="data/prunus/prunus_{chrom}.vcf.gz"
     threads:
