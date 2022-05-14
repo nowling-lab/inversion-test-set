@@ -6,8 +6,8 @@ We composed a benchmark data set for evaluating SNP-based inversion detection me
 You will need to download:
 
 * The `dgrp2.vcf` VCF file from the [Drosophila Genetics Reference Panel v2](http://dgrp2.gnets.ncsu.edu/data.html)
-* The biallelic 3L, 2R, and 2L VCF files from the FTP site for the 1000 Anopheles Genomes project phase 1 AR3 data release (ftp://ngs.sanger.ac.uk/production/ag1000g/phase1/AR3/variation/main/vcf/).  These files are named: ag1000g.phase1.ar3.pass.biallelic.{chrom}.vcf.gz where chrom is 3L, 2R, or 2L.
-* The `Annuus.ann_env.tranche90_snps_bi_AN50_AF99.vcf.gz` and `Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz` files from the [UBC Sunflower Genome project](https://rieseberglab.github.io/ubc-sunflower-genome/)
+* The biallelic 3L, 2R, and 2L VCF files from the FTP site for the 1000 Anopheles Genomes project phase 1 AR3 data release (ftp://ngs.sanger.ac.uk/production/ag1000g/phase1/AR3/variation/main/vcf/).  These files are named: `ag1000g.phase1.ar3.pass.biallelic.{chrom}.vcf.gz` where chrom is 3L, 2R, or 2L.
+* The `Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz` file from the [UBC Sunflower Genome project](https://rieseberglab.github.io/ubc-sunflower-genome/)
 * The file `SNP.vcf.gz` from [Figshare](https://figshare.com/articles/dataset/SNP_SV_and_scripts_for_RYP1_genome_paper/12937340/1)
 * The file `BLUE2020VCF.vcf.gz` from [Dryad](https://datadryad.org/stash/dataset/doi:10.5061/dryad.x69p8czfg)
 
@@ -24,7 +24,6 @@ Once you've downloaded the data, you can process the individual data sets with t
 ```bash
 $ snakemake prepare_ag1000g
 $ snakemake prepare_dgrp2
-$ snakemake prepare_annuus
 $ snakemake prepare_petiolaris
 $ snakemake prepare_cyanistes
 $ snakameke prepare_prunus
@@ -61,12 +60,10 @@ The data constitute three test cases:
   * Ag1000 2L: 150 _Anopheles gambiae_ and _coluzzii_ samples from a single geographic area (Burkina Faso) with a single inversion 2La.
   * Ag1000 2R: 150 _Anopheles gambiae_ and _coluzzii_ samples from a single geographic area (Burkina Faso) with a combination of the 2Rb and 2Rbc inversions.
 * Other positives:
-  * Helianthus petiolaris (sunflowers): Todesco, et al. found inversions on chromosomes 5, 9, 11, and 17 (see extended figures 6 and 7).  We are able to detect the pet17.03 inversion but not the pet17.01 inversion with Asaph.  Due to population structure, the inversions tend to show up on PCs 3 and 4.  We haven't done enough analysis on the data yet to identify and separate the samples by population to improve clarity of the inversion detection.
+  * Helianthus petiolaris (sunflowers): Todesco, et al. found inversions on chromosomes 5, 9, 11, and 17 (see extended figures 6 and 7).
   * Prunus persica (peach): Guan, et al. found a 1.67 Mb inversion on chromosome Pp06.  This is not currently detectable by Asaph (too small).  We do not have genotype labels.
   * Cyanistes caeruleus (Blue tit): Perrier, et al. found a 2.8 Mb inversion on chromosome 3. This is not currently detectable by Asaph (too small).  We do not have genotype\
    labels.
-* Other:
-  * Helianthus annuus (sunflowers): Processing of these data from Todesco, et al. are supported, but we have not been analyzed yet.  No labels are provided.
 
 Inversion genotype labels are provided under the `sample_labels` directory.
 

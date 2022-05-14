@@ -136,35 +136,12 @@ rule ag1000g_to_inveRsion:
     shell:
         "scripts/raw_to_inveRsion --input-raw {input.raw} --output-txt {output.inveRsion}"
 
-## Process Helianthus annuus data
-
-# chromosomes with identified inversions
-# from https://github.com/owensgl/wild_gwas_2018/blob/master/MDS_outliers/Ha412HO/annuus/Ha412HO_inv.v3.pcasites.vcf
-annuus_inv_chromosomes = ["Ha412HOChr01",
-                          "Ha412HOChr05",
-                          "Ha412HOChr11",
-                          "Ha412HOChr13",
-                          "Ha412HOChr14",
-                          "Ha412HOChr15",
-                          "Ha412HOChr16",
-                          "Ha412HOChr17"]
-
+## Process Helianthus petiolaris data
 # from https://github.com/owensgl/wild_gwas_2018/blob/master/MDS_outliers/Ha412HO/petiolaris/Ha412HO_inv.v3.pcasites.vcf
 pet_inv_chromosomes = ["Ha412HOChr05",
                        "Ha412HOChr09",
                        "Ha412HOChr11",
                        "Ha412HOChr17"]
-
-
-rule split_annuus_by_chrom:
-    input:
-        vcf="input_files/Annuus.ann_env.tranche90_snps_bi_AN50_AF99.vcf.gz"
-    output:
-        chrom_vcf="data/annuus/annuus_env_{chrom}.vcf.gz"
-    threads:
-        1
-    shell:
-        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --maf 0.01 --recode --stdout | gzip -c > {output.chrom_vcf}"
 
 rule split_pet_by_chrom:
     input:
@@ -247,11 +224,6 @@ rule prepare_ag1000g:
         ag1000g_bfaso_coluzii=expand("data/ag1000g/ag1000g_{chrom}_bfaso_coluzzii.{format}",
                                      chrom=["2L", "2R", "3L"],
                                      format=config["formats"])
-
-rule prepare_annuus:
-    input:
-        annuus_by_chrom=expand("data/annuus/annuus_env_{chrom}.vcf.gz",
-                               chrom=annuus_inv_chromosomes)
 
 rule prepare_petiolaris:
     input:
