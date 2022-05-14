@@ -31,7 +31,7 @@ We composed a benchmark data set for evaluating SNP-based inversion detection me
 | Todesco | H. petiolaris fallax | 230 | Ha412HOChr11.1 | Yes | | | No | |
 | Todesco | H. petiolaris fallax | 230 | Ha412HOChr17.3 | Yes | | | No | |
 | Guan | Prunus persica and kansuensis | 186 | Pp06 | No | | | Yes | 1.67 Mb |
-| Perrier | Cyanistes caeruleus | chromo.03 | No | | | Yes | 2.8 Mb |
+| Perrier | Cyanistes caeruleus | 454 | chromo.03 | No | | | Yes | 2.8 Mb |
 
 Genotype labels are provided under the `sample_labels` directory, and inversion boundaries are provided under the `inversion_boundaries` directory.
 
