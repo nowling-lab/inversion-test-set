@@ -166,17 +166,41 @@ rule split_annuus_by_chrom:
     shell:
         "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --maf 0.01 --recode --stdout | gzip -c > {output.chrom_vcf}"
 
-# PET0628 shows up as an outlier in PCA.  Todesco, et al. 2020 Suppl. Table 1 indicates that only 17.62%
-# of the reads aligned to the genome (compared with > 90% for the other samples).
 rule split_pet_by_chrom:
     input:
         vcf="data/raw_data/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz"
+    params:
+        exclusions=lambda w: " ".join(["--remove-indv {}".format(name) for name in config["pet_exclusions"]])
+    output:
+        chrom_vcf="data/petiolaris/both_gwas_{chrom}.vcf.gz"
+    threads:
+        1
+    shell:
+        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --maf 0.01 {params.exclusions} --recode --stdout | gzip -c > {output.chrom_vcf}"
+
+rule split_pet_pet_by_chrom:
+    input:
+        vcf="data/raw_data/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz"
+    params:
+        exclusions=lambda w: " ".join(["--remove-indv {}".format(name) for name in config["pet_exclusions"]])
     output:
         chrom_vcf="data/petiolaris/petiolaris_gwas_{chrom}.vcf.gz"
     threads:
         1
     shell:
-        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --maf 0.01 --remove-indv PET0628 --recode --stdout | gzip -c > {output.chrom_vcf}"
+        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --maf 0.01 {params.exclusions} --keep sample_lists/H_petiolaris_petiolaris_ids.txt --recode --stdout | gzip -c > {output.chrom_vcf}"
+
+rule split_pet_fallax_by_chrom:
+    input:
+        vcf="data/raw_data/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz"
+    params:
+        exclusions=lambda w: " ".join(["--remove-indv {}".format(name) for name in config["pet_exclusions"]])
+    output:
+        chrom_vcf="data/petiolaris/fallax_gwas_{chrom}.vcf.gz"
+    threads:
+        1
+    shell:
+        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --maf 0.01 {params.exclusions} --keep sample_lists/H_petiolaris_fallax_ids.txt --recode --stdout | gzip -c > {output.chrom_vcf}"
 
 ## Process blue tit (Cyanistes caeruleus) data
 cyanistes_inv_chromosomes = ["chromo.03"]
@@ -231,8 +255,12 @@ rule prepare_annuus:
 
 rule prepare_petiolaris:
     input:
+        both_by_chrom=expand("data/petiolaris/both_gwas_{chrom}.vcf.gz",
+                             chrom=pet_inv_chromosomes),
         pet_by_chrom=expand("data/petiolaris/petiolaris_gwas_{chrom}.vcf.gz",
-                            chrom=pet_inv_chromosomes)
+                            chrom=pet_inv_chromosomes),
+        fallax_by_chrom=expand("data/petiolaris/fallax_gwas_{chrom}.vcf.gz",
+                               chrom=pet_inv_chromosomes)
 
 rule prepare_cyanistes:
     input:
