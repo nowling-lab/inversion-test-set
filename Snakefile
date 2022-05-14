@@ -96,6 +96,16 @@ rule select_ag1000g_gambiae_samples:
     shell:
         "vcftools --gzvcf {input.vcf} --recode --stdout --keep sample_lists/ag1000g_bfs_ids.txt --maf 0.01 | gzip -c > {output.vcf}"
 
+rule select_ag1000g_gambiae_nohet:
+    input:
+        vcf="data/ag1000g/ag1000g_2R_bfaso_gambiae.vcf.gz"
+    output:
+        vcf="data/ag1000g/ag1000g_2R_bfaso_gambiae_nohet.vcf.gz"
+    threads:
+        1
+    shell:
+        "vcftools --gzvcf {input.vcf} --recode --stdout --keep sample_lists/ag1000g_bfs_2Rb_no_hetero_ids.txt --maf 0.01 | gzip -c > {output.vcf}"
+
 rule select_ag1000g_coluzzii_samples:
     input:
         vcf="data/ag1000g/ag1000g_{chrom}_bfaso.vcf.gz"
@@ -220,6 +230,8 @@ rule prepare_ag1000g:
                              format=config["formats"]),
         ag1000g_bfaso_gambiae=expand("data/ag1000g/ag1000g_{chrom}_bfaso_gambiae.{format}",
                                      chrom=["2L", "2R", "3L"],
+                                     format=config["formats"]),
+        ag1000g_bfaso_gambiae_nohet=expand("data/ag1000g/ag1000g_2R_bfaso_gambiae_nohet.{format}",
                                      format=config["formats"]),
         ag1000g_bfaso_coluzii=expand("data/ag1000g/ag1000g_{chrom}_bfaso_coluzzii.{format}",
                                      chrom=["2L", "2R", "3L"],
