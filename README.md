@@ -33,6 +33,28 @@ We composed a benchmark data set for evaluating SNP-based inversion detection me
 | Guan | Prunus persica and kansuensis | 186 | Pp06 | No | | | Yes | 1.67 Mb |
 | Perrier | Cyanistes caeruleus | chromo.03 | No | | | Yes | 2.8 Mb |
 
+Genotype labels are provided under the `sample_labels` directory, and inversion boundaries are provided under the `inversion_boundaries` directory.
+
+### Notes
+
+* Negatives: these data do not have any inversions
+  * DGRP2 3L: Samples with no inversions (we removed any samples with inversions) and from a single population
+  * Ag1000 3L: 150 _Anopheles gambiae_ and _coluzzii_ samples from a single geographic area (Burkina Faso)
+* DGRP2 3R: 198 samples with three overlapping and mutually-exclusive inversions In(3R)Mo, In(3R)P, and In(3R)K
+* Ag1000 2L _An. coluzzii_: 69 samples from a single geographic area (Burkina Faso); only one sample has a different genotype for 2La
+* Ag1000 2R _An. gambiae_: 81 from a single geographic area (Burkina Faso) with the 2Rb inversion
+* Ag1000 2R _An. coluzzii_: 69 from a single geographic area (Burkina Faso) with the 2Rbc inversion system and 2Rd inversion (no labels provided)
+* Helianthus petiolaris (sunflowers): Todesco, et al. found inversions on chromosomes 5, 9, 11, and 17 (see extended figures 6 and 7). Analysis of the two varieties together is confounded by population structure.  The pet05.1, pet09.1, and pet11.1 inversions show the clear three-stripe patterns in PCA when analyzed for H. petiolaris petiolaris; pet17.3 is fixed in H. petiolaris petiolaris.
+* Prunus persica and kansuensis (peach): Guan, et al. found a 1.67 Mb inversion on chromosome Pp06.
+* Cyanistes caeruleus (Blue tit): Perrier, et al. found a 2.8 Mb inversion on chromosome 3.
+
+
+### Evaluation Recommendations
+
+1. Use balanced accuracy for genotype predictions since the genotypes are not balanced
+1. Use the Sørensen–Dice coefficient, Jaccard Similarity, or precision / recall for inversion segmentation / localization
+1. Use the An. gambiae 2Rb data set without heterozygous genotypes since there are only 2 heterozygous samples
+
 ## Setup Instructions
 You will need to download:
 
@@ -72,30 +94,6 @@ The pipeline will convert the variants into three file formats:
 * VCF (potentially gzipped): This file format can be read by Asaph
 * Plink bed: This file format can be read by [pcadapt](https://bcm-uga.github.io/pcadapt/index.html)
 * inveRsion: This text file format can be read by [inveRsion](https://bioconductor.org/packages/release/bioc/html/inveRsion.html)
-
-## Description of Test Cases
-The data constitute three test cases:
-
-* Negatives: these data do not have an inversions
-  * DGRP2 3L: Samples with no inversions (we removed any samples with inversions) and from a single population
-  * Ag1000 3L: 150 _Anopheles gambiae_ and _coluzzii_ samples from a single geographic area (Burkina Faso)
-* Positives from single population
-  * DGRP2 2L: 198 samples with a single inversion In(2L)t
-  * DGRP2 2R: 198 samples with a single inversion In(2R)NS
-  * DGRP2 3R: 198 samples with three overlapping and mutually-exclusive inversions In(3R)Mo, In(3R)p, and In(3R)k
-  * Ag1000 2L _An. gambiae_: 81 samples from a single geographic area (Burkina Faso) with a single inversion 2La
-  * Ag1000 2L _An. coluzzii_: 69 samples from a single geographic area (Burkina Faso) and only one sample has a different genotype for 2La
-  * Ag1000 2R _An. gambiae_: 81 from a single geographic area (Burkina Faso) with the 2Rb inversion
-  * Ag1000 2R _An. coluzzii_: 69 from a single geographic area (Burkina Faso) with the 2Rbc inversion system and 2Rd inversion (no labels provided)
-* Positives from multiple populations
-  * Ag1000 2L: 150 _Anopheles gambiae_ and _coluzzii_ samples from a single geographic area (Burkina Faso) with a single inversion 2La.
-  * Ag1000 2R: 150 _Anopheles gambiae_ and _coluzzii_ samples from a single geographic area (Burkina Faso) with a combination of the 2Rb and 2Rbc inversions.
-* Other positives:
-  * Helianthus petiolaris (sunflowers): Todesco, et al. found inversions on chromosomes 5, 9, 11, and 17 (see extended figures 6 and 7).
-  * Prunus persica and kansuensis (peach): Guan, et al. found a 1.67 Mb inversion on chromosome Pp06.
-  * Cyanistes caeruleus (Blue tit): Perrier, et al. found a 2.8 Mb inversion on chromosome 3.
-
-Genotype labels are provided under the `sample_labels` directory, and inversion boundaries are provided under the `inversion_boundaries` directory.
 
 ## Citing
 
