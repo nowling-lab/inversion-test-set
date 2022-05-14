@@ -1,0 +1,2 @@
+input_files/*.vcf
+input_files/*.vcf.gz
