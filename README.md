@@ -19,17 +19,17 @@ We composed a benchmark data set for evaluating SNP-based inversion detection me
 | DGRPv2  | D. melanogaster | 198 | In(3R)Mo | Yes | 18.7% | | Yes | 7.6 Mb |
 | DGRPv2  | D. melanogaster | 198 | In(3R)P | Yes | 7.1% | | Yes | 8.3 Mb |
 | DGRPv2  | D. melanogaster | 198 | In(3R)K | Yes | 8.1% | | Yes | 7.6 Mb |
-| Todesco | H. petiolaris (both varieties) | 475 | Ha412HOChr05.1 | Yes | | | No | |
-| Todesco | H. petiolaris (both varieties) | 475 | Ha412HOChr09.1 | Yes | | | No | |
-| Todesco | H. petiolaris (both varieties) | 475 | Ha412HOChr11.1 | Yes | | | No | |
-| Todesco | H. petiolaris (both varieties) | 475 | Ha412HOChr17.3 | Yes | | | No | |
-| Todesco | H. petiolaris petiolaris | 158 | Ha412HOChr05.1 | Yes | | | No | |
-| Todesco | H. petiolaris petiolaris | 158 | Ha412HOChr09.1 | Yes | | | No | |
-| Todesco | H. petiolaris petiolaris | 158 | Ha412HOChr11.1 | Yes | | | No | |
-| Todesco | H. petiolaris fallax | 230 | Ha412HOChr05.1 | Yes | | | No | |
-| Todesco | H. petiolaris fallax | 230 | Ha412HOChr09.1 | Yes | | | No | |
-| Todesco | H. petiolaris fallax | 230 | Ha412HOChr11.1 | Yes | | | No | |
-| Todesco | H. petiolaris fallax | 230 | Ha412HOChr17.3 | Yes | | | No | |
+| Todesco | H. petiolaris (both varieties) | 475 | Ha412HOChr05.1 | Yes | | | Yes | 28 Mb |
+| Todesco | H. petiolaris (both varieties) | 475 | Ha412HOChr09.1 | Yes | | | Yes | 32 Mb |
+| Todesco | H. petiolaris (both varieties) | 475 | Ha412HOChr11.1 | Yes | | | Yes | 62 Mb |
+| Todesco | H. petiolaris (both varieties) | 475 | Ha412HOChr17.3 | Yes | | | Yes | 11 Mb |
+| Todesco | H. petiolaris petiolaris | 158 | Ha412HOChr05.1 | Yes | | | Yes | 28 Mb |
+| Todesco | H. petiolaris petiolaris | 158 | Ha412HOChr09.1 | Yes | | | Yes | 32 Mb |
+| Todesco | H. petiolaris petiolaris | 158 | Ha412HOChr11.1 | Yes | | | Yes | 62 Mb |
+| Todesco | H. petiolaris fallax | 230 | Ha412HOChr05.1 | Yes | | | Yes | 28 Mb |
+| Todesco | H. petiolaris fallax | 230 | Ha412HOChr09.1 | Yes | | | Yes | 32 Mb |
+| Todesco | H. petiolaris fallax | 230 | Ha412HOChr11.1 | Yes | | | Yes | 62 Mb |
+| Todesco | H. petiolaris fallax | 230 | Ha412HOChr17.3 | Yes | | | Yes | 11 Mb |
 | Todesco | H. niveus canescens | 86 | Ha412HOChr05.1 | Yes | | | No | |
 | Todesco | H. niveus canescens | 86 | Ha412HOChr09.1 | Yes | | | No | |
 | Todesco | H. niveus canescens | 86 | Ha412HOChr11.1 | Yes | | | No | |
