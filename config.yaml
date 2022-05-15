@@ -1,4 +1,4 @@
-formats: ["bed", "inveRsion", "raw", "vcf.gz"]
+formats: ["vcf.gz"]
 
 
 # PET0628 excluded because it is an outlier on PCA

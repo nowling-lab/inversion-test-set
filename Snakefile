@@ -287,6 +287,18 @@ rule prunus_pp06_window:
     shell:
         "vcftools --gzvcf {input.vcf} --chr Pp06 --from-bp 27959880 --to-bp 29634101 --recode --stdout | gzip -c > {output.chrom_vcf}"
 
+## Parus major
+parus_chromosomes = ["1A"]
+
+rule split_parus_by_chrom:
+    input:
+        "input_files/GreatTits_PolyMonoMinorHom1.10_NoUN_NoScaffolds.vcf.gz"
+    output:
+        "data/parus/parus_all_{chrom}_full.vcf.gz"
+    threads:
+        1
+    shell:
+        "vcftools --gzvcf {input} --chr {wildcards.chrom} --recode --stdout | gzip -c > {output}"
 
 # define data sets here so we can create rules that depend
 # on individual data sets and the entire set
@@ -322,7 +334,11 @@ prunus=expand("data/prunus/{dataset}_{chrom}_{region}.vcf.gz",
               chrom=prunus_inv_chromosomes,
               dataset=["prunus_both", "prunus_persica", "prunus_kansuensis"],
               region=["full", "window"])
-        
+
+parus=expand("data/parus/parus_all_{chrom}_full.vcf.gz",
+              chrom=parus_chromosomes)
+
+
 ## Top-level rules
 rule prepare_dgrp2:
     input:
@@ -347,6 +363,10 @@ rule prepare_prunus:
     input:
         prunus
 
+rule prepare_parus:
+    input:
+        parus
+
 rule prepare_all:
     input:
         dgrp=dgrp,
@@ -356,4 +376,5 @@ rule prepare_all:
         bfaso_coluzzii=ag1000g_bfaso_coluzii,
         petiolaris=petiolaris,
         cyanistes=cyanistes,
-        prunus=prunus
+        prunus=prunus,
+        parus=parus
