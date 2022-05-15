@@ -208,7 +208,7 @@ rule split_cyanistes_by_chrom:
     input:
         vcf="input_files/BLUE2020VCF.vcf.gz"
     output:
-        chrom_vcf="data/cyanistes/cyanistes_both_{chrom}_full.vcf.gz"
+        chrom_vcf="data/cyanistes/cyanistes_all_{chrom}_full.vcf.gz"
     threads:
         1
     shell:
@@ -216,7 +216,7 @@ rule split_cyanistes_by_chrom:
 
 rule split_cyanistes_corsica_by_chrom:
     input:
-        vcf="data/cyanistes/cyanistes_both_{chrom}_full.vcf.gz"
+        vcf="data/cyanistes/cyanistes_all_{chrom}_full.vcf.gz"
     output:
         chrom_vcf="data/cyanistes/cyanistes_corsica_{chrom}_full.vcf.gz"
     threads:
@@ -226,7 +226,7 @@ rule split_cyanistes_corsica_by_chrom:
 
 rule split_cyanistes_mainland_by_chrom:
     input:
-        vcf="data/cyanistes/cyanistes_both_{chrom}_full.vcf.gz"
+        vcf="data/cyanistes/cyanistes_all_{chrom}_full.vcf.gz"
     output:
         chrom_vcf="data/cyanistes/cyanistes_mainland_{chrom}_full.vcf.gz"
     threads:
@@ -251,7 +251,7 @@ rule split_prunus_by_chrom:
     input:
         vcf="input_files/SNP.vcf.gz"
     output:
-        chrom_vcf="data/prunus/prunus_both_{chrom}_full.vcf.gz"
+        chrom_vcf="data/prunus/prunus_all_{chrom}_full.vcf.gz"
     threads:
         1
     shell:
@@ -259,7 +259,7 @@ rule split_prunus_by_chrom:
 
 rule split_prunus_persica_by_chrom:
     input:
-        vcf="data/prunus/prunus_both_{chrom}_full.vcf.gz"
+        vcf="data/prunus/prunus_all_{chrom}_full.vcf.gz"
     output:
         chrom_vcf="data/prunus/prunus_persica_{chrom}_full.vcf.gz"
     threads:
@@ -269,7 +269,7 @@ rule split_prunus_persica_by_chrom:
 
 rule split_prunus_kansuensis_by_chrom:
     input:
-        vcf="data/prunus/prunus_both_{chrom}_full.vcf.gz"
+        vcf="data/prunus/prunus_all_{chrom}_full.vcf.gz"
     output:
         chrom_vcf="data/prunus/prunus_kansuensis_{chrom}_full.vcf.gz"
     threads:
@@ -327,12 +327,12 @@ petiolaris=expand("data/petiolaris/petiolaris_{dataset}_{chrom}.vcf.gz",
 
 cyanistes=expand("data/cyanistes/{dataset}_{chrom}_{region}.vcf.gz",
                  chrom=cyanistes_inv_chromosomes,
-                 dataset=["cyanistes_both", "cyanistes_corsica", "cyanistes_mainland"],
+                 dataset=["cyanistes_all", "cyanistes_corsica", "cyanistes_mainland"],
                  region=["window", "full"])
 
 prunus=expand("data/prunus/{dataset}_{chrom}_{region}.vcf.gz",
               chrom=prunus_inv_chromosomes,
-              dataset=["prunus_both", "prunus_persica", "prunus_kansuensis"],
+              dataset=["prunus_all", "prunus_persica", "prunus_kansuensis"],
               region=["full", "window"])
 
 parus=expand("data/parus/parus_all_{chrom}_full.vcf.gz",
