@@ -167,7 +167,7 @@ rule split_pet_by_chrom:
 
 rule split_pet_pet_by_chrom:
     input:
-        vcf="input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz"
+        vcf="data/petiolaris/petiolaris_all_{chrom}.vcf.gz"
     params:
         exclusions=lambda w: " ".join(["--remove-indv {}".format(name) for name in config["pet_exclusions"]])
     output:
@@ -179,7 +179,7 @@ rule split_pet_pet_by_chrom:
 
 rule split_pet_fallax_by_chrom:
     input:
-        vcf="input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz"
+        vcf="data/petiolaris/petiolaris_all_{chrom}.vcf.gz"
     params:
         exclusions=lambda w: " ".join(["--remove-indv {}".format(name) for name in config["pet_exclusions"]])
     output:
@@ -191,7 +191,7 @@ rule split_pet_fallax_by_chrom:
 
 rule split_pet_niveus_by_chrom:
     input:
-        vcf="input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz"
+        vcf="data/petiolaris/petiolaris_all_{chrom}.vcf.gz"
     params:
         exclusions=lambda w: " ".join(["--remove-indv {}".format(name) for name in config["pet_exclusions"]])
     output:
@@ -216,7 +216,7 @@ rule split_cyanistes_by_chrom:
 
 rule split_cyanistes_corsica_by_chrom:
     input:
-        vcf="input_files/BLUE2020VCF.vcf.gz"
+        vcf="data/cyanistes/cyanistes_both_{chrom}_full.vcf.gz"
     output:
         chrom_vcf="data/cyanistes/cyanistes_corsica_{chrom}_full.vcf.gz"
     threads:
@@ -226,7 +226,7 @@ rule split_cyanistes_corsica_by_chrom:
 
 rule split_cyanistes_mainland_by_chrom:
     input:
-        vcf="input_files/BLUE2020VCF.vcf.gz"
+        vcf="data/cyanistes/cyanistes_both_{chrom}_full.vcf.gz"
     output:
         chrom_vcf="data/cyanistes/cyanistes_mainland_{chrom}_full.vcf.gz"
     threads:
@@ -259,7 +259,7 @@ rule split_prunus_by_chrom:
 
 rule split_prunus_persica_by_chrom:
     input:
-        vcf="input_files/SNP.vcf.gz"
+        vcf="data/prunus/prunus_both_{chrom}_full.vcf.gz"
     output:
         chrom_vcf="data/prunus/prunus_persica_{chrom}_full.vcf.gz"
     threads:
@@ -269,7 +269,7 @@ rule split_prunus_persica_by_chrom:
 
 rule split_prunus_kansuensis_by_chrom:
     input:
-        vcf="input_files/SNP.vcf.gz"
+        vcf="data/prunus/prunus_both_{chrom}_full.vcf.gz"
     output:
         chrom_vcf="data/prunus/prunus_kansuensis_{chrom}_full.vcf.gz"
     threads:
@@ -287,43 +287,73 @@ rule prunus_pp06_window:
     shell:
         "vcftools --gzvcf {input.vcf} --chr Pp06 --from-bp 27959880 --to-bp 29634101 --recode --stdout | gzip -c > {output.chrom_vcf}"
 
+
+# define data sets here so we can create rules that depend
+# on individual data sets and the entire set
+dgrp=expand("data/dgrp2/dgrp2_{chrom}.biallelic.{format}",
+            chrom=["2L", "2R", "3R", "3L"],
+            format=config["formats"])
+
+ag1000g_bfaso=expand("data/ag1000g/ag1000g_{chrom}_bfaso.{format}",
+                     chrom=["2L", "2R", "3L"],
+                     format=config["formats"])
+
+ag1000g_bfaso_gambiae=expand("data/ag1000g/ag1000g_{chrom}_bfaso_gambiae.{format}",
+                             chrom=["2L", "2R", "3L"],
+                             format=config["formats"])
+
+ag1000g_bfaso_gambiae_nohet=expand("data/ag1000g/ag1000g_2R_bfaso_gambiae_nohet.{format}",
+                                     format=config["formats"])
+
+ag1000g_bfaso_coluzii=expand("data/ag1000g/ag1000g_{chrom}_bfaso_coluzzii.{format}",
+                             chrom=["2L", "2R", "3L"],
+                             format=config["formats"])
+
+petiolaris=expand("data/petiolaris/petiolaris_{dataset}_{chrom}.vcf.gz",
+                  chrom=pet_inv_chromosomes,
+                  dataset=["all", "petiolaris", "fallax", "niveus"])
+
+cyanistes=expand("data/cyanistes/{dataset}_{chrom}_{region}.vcf.gz",
+                 chrom=cyanistes_inv_chromosomes,
+                 dataset=["cyanistes_both", "cyanistes_corsica", "cyanistes_mainland"],
+                 region=["window", "full"])
+
+prunus=expand("data/prunus/{dataset}_{chrom}_{region}.vcf.gz",
+              chrom=prunus_inv_chromosomes,
+              dataset=["prunus_both", "prunus_persica", "prunus_kansuensis"],
+              region=["full", "window"])
+        
 ## Top-level rules
 rule prepare_dgrp2:
     input:
-        dgrp=expand("data/dgrp2/dgrp2_{chrom}.biallelic.{format}",
-                    chrom=["2L", "2R", "3R", "3L"],
-                    format=config["formats"])
-
+        dgrp
+        
 rule prepare_ag1000g:
     input:
-        ag1000g_bfaso=expand("data/ag1000g/ag1000g_{chrom}_bfaso.{format}",
-                             chrom=["2L", "2R", "3L"],
-                             format=config["formats"]),
-        ag1000g_bfaso_gambiae=expand("data/ag1000g/ag1000g_{chrom}_bfaso_gambiae.{format}",
-                                     chrom=["2L", "2R", "3L"],
-                                     format=config["formats"]),
-        ag1000g_bfaso_gambiae_nohet=expand("data/ag1000g/ag1000g_2R_bfaso_gambiae_nohet.{format}",
-                                     format=config["formats"]),
-        ag1000g_bfaso_coluzii=expand("data/ag1000g/ag1000g_{chrom}_bfaso_coluzzii.{format}",
-                                     chrom=["2L", "2R", "3L"],
-                                     format=config["formats"])
+        bfaso=ag1000g_bfaso,
+        bfaso_gambiae=ag1000g_bfaso_gambiae,
+        bfaso_gambiae_nohet=ag1000g_bfaso_gambiae_nohet,
+        bfaso_coluzzii=ag1000g_bfaso_coluzii
 
 rule prepare_petiolaris:
     input:
-        both_by_chrom=expand("data/petiolaris/petiolaris_{dataset}_{chrom}.vcf.gz",
-                             chrom=pet_inv_chromosomes,
-                             dataset=["all", "petiolaris", "fallax", "niveus"])
+        petiolaris
 
 rule prepare_cyanistes:
     input:
-        cyanistes_by_chrom=expand("data/cyanistes/{dataset}_{chrom}_{region}.vcf.gz",
-                                  chrom=cyanistes_inv_chromosomes,
-                                  dataset=["cyanistes_both", "cyanistes_corsica", "cyanistes_mainland"],
-                                  region=["window", "full"])
+        cyanistes
 
 rule prepare_prunus:
     input:
-        prunus_by_chrom=expand("data/prunus/{dataset}_{chrom}_{region}.vcf.gz",
-                               chrom=prunus_inv_chromosomes,
-                               dataset=["prunus_both", "prunus_persica", "prunus_kansuensis"],
-                               region=["full", "window"])
+        prunus
+
+rule prepare_all:
+    input:
+        dgrp=dgrp,
+        bfaso=ag1000g_bfaso,
+        bfaso_gambiae=ag1000g_bfaso_gambiae,
+        bfaso_gambiae_nohet=ag1000g_bfaso_gambiae_nohet,
+        bfaso_coluzzii=ag1000g_bfaso_coluzii,
+        petiolaris=petiolaris,
+        cyanistes=cyanistes,
+        prunus=prunus
