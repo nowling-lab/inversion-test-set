@@ -37,8 +37,8 @@ We composed a benchmark data set for evaluating SNP-based inversion detection me
 | Guan | Prunus persica and kansuensis | 186 | Pp06 | No | | | Yes | 1.67 Mb |
 | Guan | Prunus persica | 149 | Pp06 | No | | | Yes | 1.67 Mb |
 | Perrier | Cyanistes caeruleus | 454 | chromo.03 | No | | | Yes | 2.8 Mb |
-| Perrier | Cyanistes caeruleus (corsica) | 342 | chromo.03 | No | | | Yes | 2.8 Mb |
-| Perrier | Cyanistes caeruleus (mainland) | 112 | chromo.03 | Yes | | | Yes | 2.8 Mb |
+| Perrier | Cyanistes caeruleus (corsica) | 343 | chromo.03 | No | | | Yes | 2.8 Mb |
+| Perrier | Cyanistes caeruleus (mainland) | 111 | chromo.03 | Yes | | | Yes | 2.8 Mb |
 
 Genotype labels are provided under the `inversion_genotypes` directory, and inversion boundaries are provided under the `inversion_boundaries` directory.
 
