@@ -159,7 +159,7 @@ rule split_pet_by_chrom:
     params:
         exclusions=lambda w: " ".join(["--remove-indv {}".format(name) for name in config["pet_exclusions"]])
     output:
-        chrom_vcf="data/petiolaris/both_gwas_{chrom}.vcf.gz"
+        chrom_vcf="data/petiolaris/petiolaris_all_{chrom}.vcf.gz"
     threads:
         1
     shell:
@@ -171,7 +171,7 @@ rule split_pet_pet_by_chrom:
     params:
         exclusions=lambda w: " ".join(["--remove-indv {}".format(name) for name in config["pet_exclusions"]])
     output:
-        chrom_vcf="data/petiolaris/petiolaris_gwas_{chrom}.vcf.gz"
+        chrom_vcf="data/petiolaris/petiolaris_petiolaris_{chrom}.vcf.gz"
     threads:
         1
     shell:
@@ -183,11 +183,23 @@ rule split_pet_fallax_by_chrom:
     params:
         exclusions=lambda w: " ".join(["--remove-indv {}".format(name) for name in config["pet_exclusions"]])
     output:
-        chrom_vcf="data/petiolaris/fallax_gwas_{chrom}.vcf.gz"
+        chrom_vcf="data/petiolaris/petiolaris_fallax_{chrom}.vcf.gz"
     threads:
         1
     shell:
         "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --maf 0.01 {params.exclusions} --keep sample_lists/H_petiolaris_fallax_ids.txt --recode --stdout | gzip -c > {output.chrom_vcf}"
+
+rule split_pet_niveus_by_chrom:
+    input:
+        vcf="input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz"
+    params:
+        exclusions=lambda w: " ".join(["--remove-indv {}".format(name) for name in config["pet_exclusions"]])
+    output:
+        chrom_vcf="data/petiolaris/petiolaris_niveus_{chrom}.vcf.gz"
+    threads:
+        1
+    shell:
+        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --maf 0.01 {params.exclusions} --keep sample_lists/H_niveus_canescens_ids.txt --recode --stdout | gzip -c > {output.chrom_vcf}"
 
 ## Process blue tit (Cyanistes caeruleus) data
 cyanistes_inv_chromosomes = ["chromo.03"]
@@ -196,11 +208,41 @@ rule split_cyanistes_by_chrom:
     input:
         vcf="input_files/BLUE2020VCF.vcf.gz"
     output:
-        chrom_vcf="data/cyanistes/cyanistes_{chrom}.vcf.gz"
+        chrom_vcf="data/cyanistes/cyanistes_both_{chrom}_full.vcf.gz"
     threads:
         1
     shell:
         "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --recode --stdout | gzip -c > {output.chrom_vcf}"
+
+rule split_cyanistes_corsica_by_chrom:
+    input:
+        vcf="input_files/BLUE2020VCF.vcf.gz"
+    output:
+        chrom_vcf="data/cyanistes/cyanistes_corsica_{chrom}_full.vcf.gz"
+    threads:
+        1
+    shell:
+        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --keep sample_lists/cyanistes_corsica_ids.txt --recode --stdout | gzip -c > {output.chrom_vcf}"
+
+rule split_cyanistes_mainland_by_chrom:
+    input:
+        vcf="input_files/BLUE2020VCF.vcf.gz"
+    output:
+        chrom_vcf="data/cyanistes/cyanistes_mainland_{chrom}_full.vcf.gz"
+    threads:
+        1
+    shell:
+        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --keep sample_lists/cyanistes_mainland_ids.txt --recode --stdout | gzip -c > {output.chrom_vcf}"
+
+rule cyanistes_chr03_window:
+    input:
+        "data/cyanistes/{dataset}_chromo.03_full.vcf.gz"
+    output:
+        "data/cyanistes/{dataset}_chromo.03_window.vcf.gz"
+    threads:
+        1
+    shell:
+        "vcftools --gzvcf {input} --chr chromo.03 --from-bp 11838789 --to-bp 14661550 --recode --stdout | gzip -c > {output}"
 
 ## Process peach (Prunus persica) data
 prunus_inv_chromosomes = ["Pp06"]
@@ -209,13 +251,42 @@ rule split_prunus_by_chrom:
     input:
         vcf="input_files/SNP.vcf.gz"
     output:
-        chrom_vcf="data/prunus/prunus_{chrom}.vcf.gz"
+        chrom_vcf="data/prunus/prunus_both_{chrom}_full.vcf.gz"
     threads:
         1
     shell:
         "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --recode --stdout | gzip -c > {output.chrom_vcf}"
 
-        
+rule split_prunus_persica_by_chrom:
+    input:
+        vcf="input_files/SNP.vcf.gz"
+    output:
+        chrom_vcf="data/prunus/prunus_persica_{chrom}_full.vcf.gz"
+    threads:
+        1
+    shell:
+        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --keep sample_lists/prunus_persica_ids.txt --recode --stdout | gzip -c > {output.chrom_vcf}"
+
+rule split_prunus_kansuensis_by_chrom:
+    input:
+        vcf="input_files/SNP.vcf.gz"
+    output:
+        chrom_vcf="data/prunus/prunus_kansuensis_{chrom}_full.vcf.gz"
+    threads:
+        1
+    shell:
+        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --keep sample_lists/prunus_kansuensis_ids.txt --recode --stdout | gzip -c > {output.chrom_vcf}"
+
+rule prunus_pp06_window:
+    input:
+        vcf="data/prunus/{dataset}_Pp06_full.vcf.gz"
+    output:
+        chrom_vcf="data/prunus/{dataset}_Pp06_window.vcf.gz"
+    threads:
+        1
+    shell:
+        "vcftools --gzvcf {input.vcf} --chr Pp06 --from-bp 27959880 --to-bp 29634101 --recode --stdout | gzip -c > {output.chrom_vcf}"
+
 ## Top-level rules
 rule prepare_dgrp2:
     input:
@@ -239,19 +310,20 @@ rule prepare_ag1000g:
 
 rule prepare_petiolaris:
     input:
-        both_by_chrom=expand("data/petiolaris/both_gwas_{chrom}.vcf.gz",
-                             chrom=pet_inv_chromosomes),
-        pet_by_chrom=expand("data/petiolaris/petiolaris_gwas_{chrom}.vcf.gz",
-                            chrom=pet_inv_chromosomes),
-        fallax_by_chrom=expand("data/petiolaris/fallax_gwas_{chrom}.vcf.gz",
-                               chrom=pet_inv_chromosomes)
+        both_by_chrom=expand("data/petiolaris/petiolaris_{dataset}_{chrom}.vcf.gz",
+                             chrom=pet_inv_chromosomes,
+                             dataset=["all", "petiolaris", "fallax", "niveus"])
 
 rule prepare_cyanistes:
     input:
-        cyanistes_by_chrom=expand("data/cyanistes/cyanistes_{chrom}.vcf.gz",
-                                  chrom=cyanistes_inv_chromosomes)
+        cyanistes_by_chrom=expand("data/cyanistes/{dataset}_{chrom}_{region}.vcf.gz",
+                                  chrom=cyanistes_inv_chromosomes,
+                                  dataset=["cyanistes_both", "cyanistes_corsica", "cyanistes_mainland"],
+                                  region=["window", "full"])
 
 rule prepare_prunus:
     input:
-        prunus_by_chrom=expand("data/prunus/prunus_{chrom}.vcf.gz",
-                               chrom=prunus_inv_chromosomes)
+        prunus_by_chrom=expand("data/prunus/{dataset}_{chrom}_{region}.vcf.gz",
+                               chrom=prunus_inv_chromosomes,
+                               dataset=["prunus_both", "prunus_persica", "prunus_kansuensis"],
+                               region=["full", "window"])

@@ -30,8 +30,15 @@ We composed a benchmark data set for evaluating SNP-based inversion detection me
 | Todesco | H. petiolaris fallax | 230 | Ha412HOChr09.1 | Yes | | | No | |
 | Todesco | H. petiolaris fallax | 230 | Ha412HOChr11.1 | Yes | | | No | |
 | Todesco | H. petiolaris fallax | 230 | Ha412HOChr17.3 | Yes | | | No | |
+| Todesco | H. niveus canescens | 86 | Ha412HOChr05.1 | Yes | | | No | |
+| Todesco | H. niveus canescens | 86 | Ha412HOChr09.1 | Yes | | | No | |
+| Todesco | H. niveus canescens | 86 | Ha412HOChr11.1 | Yes | | | No | |
+| Todesco | H. niveus canescens | 86 | Ha412HOChr17.3 | Yes | | | No | |
 | Guan | Prunus persica and kansuensis | 186 | Pp06 | No | | | Yes | 1.67 Mb |
+| Guan | Prunus persica | 149 | Pp06 | No | | | Yes | 1.67 Mb |
 | Perrier | Cyanistes caeruleus | 454 | chromo.03 | No | | | Yes | 2.8 Mb |
+| Perrier | Cyanistes caeruleus (corsica) | 342 | chromo.03 | No | | | Yes | 2.8 Mb |
+| Perrier | Cyanistes caeruleus (mainland) | 112 | chromo.03 | Yes | | | Yes | 2.8 Mb |
 
 Genotype labels are provided under the `inversion_genotypes` directory, and inversion boundaries are provided under the `inversion_boundaries` directory.
 
@@ -58,11 +65,11 @@ Genotype labels are provided under the `inversion_genotypes` directory, and inve
 ## Setup Instructions
 You will need to download:
 
-* The `dgrp2.vcf` VCF file from the [Drosophila Genetics Reference Panel v2](http://dgrp2.gnets.ncsu.edu/data.html)
-* The biallelic 3L, 2R, and 2L VCF files from the FTP site for the 1000 Anopheles Genomes project phase 1 AR3 data release (ftp://ngs.sanger.ac.uk/production/ag1000g/phase1/AR3/variation/main/vcf/).  These files are named: `ag1000g.phase1.ar3.pass.biallelic.{chrom}.vcf.gz` where chrom is 3L, 2R, or 2L.
-* The `Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz` file from the [UBC Sunflower Genome project](https://rieseberglab.github.io/ubc-sunflower-genome/)
-* The file `SNP.vcf.gz` (for Prunus) from [Figshare](https://figshare.com/articles/dataset/SNP_SV_and_scripts_for_RYP1_genome_paper/12937340/1)
-* The file `BLUE2020VCF.vcf.gz` from [Dryad](https://datadryad.org/stash/dataset/doi:10.5061/dryad.x69p8czfg)
+* Drosophila: The `dgrp2.vcf` VCF file from the [Drosophila Genetics Reference Panel v2](http://dgrp2.gnets.ncsu.edu/data.html)
+* Anopheles: The biallelic 3L, 2R, and 2L VCF files from the FTP site for the 1000 Anopheles Genomes project phase 1 AR3 data release (`ftp://ngs.sanger.ac.uk/production/ag1000g/phase1/AR3/variation/main/vcf/`).  These files are named: `ag1000g.phase1.ar3.pass.biallelic.{chrom}.vcf.gz` where chrom is 3L, 2R, or 2L.
+* H. petiolaris: `Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz` from the [UBC Sunflower Genome project](https://rieseberglab.github.io/ubc-sunflower-genome/)
+* Prunus: `SNP.vcf.gz` (for Prunus) from [Figshare](https://figshare.com/articles/dataset/SNP_SV_and_scripts_for_RYP1_genome_paper/12937340/1)
+* Cyanistes: `BLUE2020VCF.vcf.gz` from [Dryad](https://datadryad.org/stash/dataset/doi:10.5061/dryad.x69p8czfg)
 
 Place these files in the directory `input_files`.  The directory contains an empty file named `PLACE_INPUT_FILES_HERE`.
 
@@ -104,8 +111,8 @@ If you use this data set, please cite the original papers from which the data ar
 * **Drosophila Genetics Reference Panel**: Mackay, T., Richards, S., Stone, E., et al. [The Drosophila melanogaster Genetic Reference Panel.](https://doi.org/10.1038/nature10811) Nature 482, 173–178 (2012).
 * **Drosophila Genetics Reference Panel**: Huang, W., Massouras, A., Inoue, Y., et al. [Natural variation in genome architecture among 205 Drosophila melanogaster Genetic Reference Panel lines.](https://doi.org/10.1101/gr.171546.113) Genome Research 24:1193-1208 (2014).
 * **UBC Sunflower Genome project**: Todesco, et al. [Massive haplotypes underlie ecotypic differentiation in sunflowers](https://www.nature.com/articles/s41586-020-2467-6) Nature (2020).
-* **Peach**: Guan, et al. [Genome structure variation analyses of peach reveal population dynamics and a 1.67 Mb causal inversion for fruit shape](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-02239-1) (2021)
-* **Blue tit**: Perrier, et al. [Demographic history and genomics of local adaptation in blue tit populations](https://onlinelibrary.wiley.com/doi/10.1111/eva.13035) (2020).
+* **Peach**: Guan, et al. [Genome structure variation analyses of peach reveal population dynamics and a 1.67 Mb causal inversion for fruit shape](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-02239-1). Genome Biology. (2021)
+* **Blue tit**: Perrier, et al. [Demographic history and genomics of local adaptation in blue tit populations](https://onlinelibrary.wiley.com/doi/10.1111/eva.13035). Evolutionary Applications. 2020.
 
 and our paper describing the test set:
 
