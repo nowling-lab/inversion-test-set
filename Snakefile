@@ -163,7 +163,7 @@ rule split_pet_by_chrom:
     threads:
         1
     shell:
-        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --maf 0.01 {params.exclusions} --recode --stdout | gzip -c > {output.chrom_vcf}"
+        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --maf 0.01 {params.exclusions} --keep sample_lists/H_petiolaris_both_ids.txt --recode --stdout | gzip -c > {output.chrom_vcf}"
 
 rule split_pet_pet_by_chrom:
     input:
@@ -188,18 +188,6 @@ rule split_pet_fallax_by_chrom:
         1
     shell:
         "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --maf 0.01 {params.exclusions} --keep sample_lists/H_petiolaris_fallax_ids.txt --recode --stdout | gzip -c > {output.chrom_vcf}"
-
-rule split_pet_niveus_by_chrom:
-    input:
-        vcf="data/petiolaris/petiolaris_all_{chrom}.vcf.gz"
-    params:
-        exclusions=lambda w: " ".join(["--remove-indv {}".format(name) for name in config["pet_exclusions"]])
-    output:
-        chrom_vcf="data/petiolaris/petiolaris_niveus_{chrom}.vcf.gz"
-    threads:
-        1
-    shell:
-        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --maf 0.01 {params.exclusions} --keep sample_lists/H_niveus_canescens_ids.txt --recode --stdout | gzip -c > {output.chrom_vcf}"
 
 ## Process blue tit (Cyanistes caeruleus) data
 cyanistes_inv_chromosomes = ["chromo.03"]
@@ -323,7 +311,7 @@ ag1000g_bfaso_coluzii=expand("data/ag1000g/ag1000g_{chrom}_bfaso_coluzzii.{forma
 
 petiolaris=expand("data/petiolaris/petiolaris_{dataset}_{chrom}.vcf.gz",
                   chrom=pet_inv_chromosomes,
-                  dataset=["all", "petiolaris", "fallax", "niveus"])
+                  dataset=["all", "petiolaris", "fallax"])
 
 cyanistes=expand("data/cyanistes/{dataset}_{chrom}_{region}.vcf.gz",
                  chrom=cyanistes_inv_chromosomes,
