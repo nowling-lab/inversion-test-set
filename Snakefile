@@ -96,15 +96,15 @@ rule select_ag1000g_gambiae_samples:
     shell:
         "vcftools --gzvcf {input.vcf} --recode --stdout --keep sample_lists/ag1000g_bfs_ids.txt --maf 0.01 | gzip -c > {output.vcf}"
 
-rule select_ag1000g_gambiae_nohet:
+rule select_ag1000g_gambiae_nohomostd:
     input:
         vcf="data/ag1000g/ag1000g_2R_bfaso_gambiae.vcf.gz"
     output:
-        vcf="data/ag1000g/ag1000g_2R_bfaso_gambiae_nohet.vcf.gz"
+        vcf="data/ag1000g/ag1000g_2R_bfaso_gambiae_nohomostd.vcf.gz"
     threads:
         1
     shell:
-        "vcftools --gzvcf {input.vcf} --recode --stdout --keep sample_lists/ag1000g_bfs_2Rb_no_hetero_ids.txt --maf 0.01 | gzip -c > {output.vcf}"
+        "vcftools --gzvcf {input.vcf} --recode --stdout --keep sample_lists/ag1000g_bfs_2Rb_nohomostd_ids.txt --maf 0.01 | gzip -c > {output.vcf}"
 
 rule select_ag1000g_coluzzii_samples:
     input:
@@ -302,7 +302,7 @@ ag1000g_bfaso_gambiae=expand("data/ag1000g/ag1000g_{chrom}_bfaso_gambiae.{format
                              chrom=["2L", "2R", "3L"],
                              format=config["formats"])
 
-ag1000g_bfaso_gambiae_nohet=expand("data/ag1000g/ag1000g_2R_bfaso_gambiae_nohet.{format}",
+ag1000g_bfaso_gambiae_nohomostd=expand("data/ag1000g/ag1000g_2R_bfaso_gambiae_nohomostd.{format}",
                                      format=config["formats"])
 
 ag1000g_bfaso_coluzii=expand("data/ag1000g/ag1000g_{chrom}_bfaso_coluzzii.{format}",
@@ -332,7 +332,7 @@ rule prepare_ag1000g:
     input:
         bfaso=ag1000g_bfaso,
         bfaso_gambiae=ag1000g_bfaso_gambiae,
-        bfaso_gambiae_nohet=ag1000g_bfaso_gambiae_nohet,
+        bfaso_gambiae_nohet=ag1000g_bfaso_gambiae_nohomostd,
         bfaso_coluzzii=ag1000g_bfaso_coluzii
 
 rule prepare_petiolaris:
@@ -352,7 +352,7 @@ rule prepare_all:
         dgrp=dgrp,
         bfaso=ag1000g_bfaso,
         bfaso_gambiae=ag1000g_bfaso_gambiae,
-        bfaso_gambiae_nohet=ag1000g_bfaso_gambiae_nohet,
+        bfaso_gambiae_nohet=ag1000g_bfaso_gambiae_nohomostd,
         bfaso_coluzzii=ag1000g_bfaso_coluzii,
         petiolaris=petiolaris,
         cyanistes=cyanistes,

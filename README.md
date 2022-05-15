@@ -10,7 +10,7 @@ We composed a benchmark data set for evaluating SNP-based inversion detection me
 | Ag1000g | An. gambaie and coluzzii, B. Faso | 150 | 2Rb | Yes | 59.3% | | Yes | 7.55 Mb |
 | Ag1000g | An. gambaie, B. Faso | 81 | 2La | Yes | 90.7% | | Yes | 21.6 Mb |
 | Ag1000g | An. gambaie, B. Faso | 81 | 2Rb | Yes | 82.1% | | Yes | 7.55 Mb |
-| Ag1000g | An. gambaie, B. Faso (No hetero) | 79 | 2Rb | Yes | | | Yes | 7.55 Mb |
+| Ag1000g | An. gambaie, B. Faso (No homo std) | 79 | 2Rb | Yes | | | Yes | 7.55 Mb |
 | Ag1000g | An. coluzzii, B. Faso | 69 | 2Rb | Yes | 31.1% | | Yes | 7.55 Mb |
 | Ag1000g | An. coluzzii, B. Faso | 69 | 2Rc | No | | | Yes | 4.7 Mb |
 | Ag1000g | An. coluzzii, B. Faso | 69 | 2Rd | No | | | Yes | 10.9 Mb |
