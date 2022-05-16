@@ -19,7 +19,7 @@ We composed a benchmark data set for evaluating SNP-based inversion detection me
 | pet09.01     | petiolaris (158)                     | Full              | Yes                 | Yes                  |
 | pet11.01     | petiolaris (158), fallax (230)       | Full, Window      | Yes                 | Yes                  |
 | pet17.02     | petiolaris (158)                     | Full, Window      | Yes                 | Yes                  |
-| prunus06     | persica (149)                        | Full, Window      | Yes                 | Yes                  |
+| prunus06     | persica (149)                        | Full, Window      | No                  | Yes                  |
 | cyan03       | mainland                             | Full, Window      | Yes                 | Yes                  |
 
 Genotype labels are provided under the `inversion_genotypes` directory, and inversion boundaries are provided under the `inversion_boundaries` directory.
