@@ -24,20 +24,6 @@ We composed a benchmark data set for evaluating SNP-based inversion detection me
 
 Genotype labels are provided under the `inversion_genotypes` directory, and inversion boundaries are provided under the `inversion_boundaries` directory.
 
-### Notes
-
-* Negatives: these data do not have any inversions
-  * DGRP2 3L: Samples with no inversions (we removed any samples with inversions) and from a single population
-  * Ag1000 3L: 150 _Anopheles gambiae_ and _coluzzii_ samples from a single geographic area (Burkina Faso)
-* DGRP2 3R: 198 samples with three overlapping and mutually-exclusive inversions In(3R)Mo, In(3R)P, and In(3R)K
-* Ag1000 2L _An. coluzzii_: 69 samples from a single geographic area (Burkina Faso); only one sample has a different genotype for 2La
-* Ag1000 2R _An. gambiae_: 81 from a single geographic area (Burkina Faso) with the 2Rb inversion
-* Ag1000 2R _An. coluzzii_: 69 from a single geographic area (Burkina Faso) with the 2Rbc inversion system and 2Rd inversion (no labels provided)
-* Helianthus petiolaris (sunflowers): Todesco, et al. found inversions on chromosomes 5, 9, 11, and 17 (see extended figures 6 and 7). Analysis of the two varieties together is confounded by population structure.  The pet05.1, pet09.1, and pet11.1 inversions show the clear three-stripe patterns in PCA when analyzed for H. petiolaris petiolaris; pet17.3 is fixed in H. petiolaris petiolaris.
-* Prunus persica and kansuensis (peach): Guan, et al. found a 1.67 Mb inversion on chromosome Pp06.
-* Cyanistes caeruleus (Blue tit): Perrier, et al. found a 2.8 Mb inversion on chromosome 3.
-
-
 ### Evaluation Recommendations
 
 1. Use balanced accuracy for genotype predictions since the genotypes are not balanced
