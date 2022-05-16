@@ -7,8 +7,8 @@ We composed a benchmark data set for evaluating SNP-based inversion detection me
 | Inversion ID | Groups (Samples)                       | Regions Available | Genotypes Available | Boundaries Available |
 | ------------ | -------------------------------------- | ----------------- | ------------------- | -------------------- |
 | ag1000g-2La  | gambiae (81)                           | Full              | Yes                 | Yes                  |
-| ag1000g-2Rb  | gambiae (81), gambiae-nohomostd (79)   | Full              | Yes                 | Yes                  |
-| ag1000g-2Rbc | coluzzii (69)                          | Full              | Yes                 | Yes                  |
+| ag1000g-2Rb  | gambiae (81), gambiae-nohomostd (79), coluzzii (69) | Full | Yes                 | Yes                  |
+| ag1000g-2Rc  | coluzzii (69)                          | Full              | No                  | Yes                  |
 | ag1000g-2Rd  | coluzzii (69)                          | Full, Window      | No                  | Yes                  |
 | dgrp2-In2Lt  | DGRPv2 (198)                           | Full              | Yes                 | Yes                  |
 | dgrp2-In2Rns | DGRPv2 (198)                           | Full              | Yes                 | Yes                  |
@@ -20,7 +20,7 @@ We composed a benchmark data set for evaluating SNP-based inversion detection me
 | pet11.01     | petiolaris (158), fallax (230)         | Full, Window      | Yes                 | Yes                  |
 | pet17.02     | petiolaris (158)                       | Full, Window      | Yes                 | Yes                  |
 | prunus06     | persica (149)                          | Full, Window      | No                  | Yes                  |
-| cyan03       | mainland (111), mainland-nohomo2 (109) | Full, Window      | Yes                 | Yes                  |
+| cyan03       | mainland (111), mainland-nohomo2 (109) | Full, Window      | No                  | Yes                  |
 
 Genotype labels are provided under the `inversion_genotypes` directory, and inversion boundaries are provided under the `inversion_boundaries` directory.
 
