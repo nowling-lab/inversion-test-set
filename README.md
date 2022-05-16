@@ -4,23 +4,23 @@ We composed a benchmark data set for evaluating SNP-based inversion detection me
 
 ## Overview of Data Sets
 
-| Inversion ID | Groups (Samples)                     | Regions Available | Genotypes Available | Boundaries Available |
-| ------------ | ------------------------------------ | ----------------- | ------------------- | -------------------- |
-| ag1000g-2La  | gambiae (81)                         | Full              | Yes                 | Yes                  |
-| ag1000g-2Rb  | gambiae (81), gambiae-nohomostd (79) | Full              | Yes                 | Yes                  |
-| ag1000g-2Rbc | coluzzii (69)                        | Full              | Yes                 | Yes                  |
-| ag1000g-2Rd  | coluzzii (69)                        | Full, Window      | No                  | Yes                  |
-| dgrp2-In2Lt  | DGRPv2 (198)                         | Full              | Yes                 | Yes                  |
-| dgrp2-In2Rns | DGRPv2 (198)                         | Full              | Yes                 | Yes                  |
-| dgrp2-In3Rp  | DGRPv2 (198)                         | Full              | Yes                 | Yes                  |
-| dgrp2-In3Rmo | DGRPv2 (198)                         | Full              | Yes                 | Yes                  |
-| dgrp2-In3Rk  | DGRPv2 (198)                         | Full              | Yes                 | Yes                  |
-| pet05.01     | petiolaris (158)                     | Full              | Yes                 | Yes                  |
-| pet09.01     | petiolaris (158)                     | Full              | Yes                 | Yes                  |
-| pet11.01     | petiolaris (158), fallax (230)       | Full, Window      | Yes                 | Yes                  |
-| pet17.02     | petiolaris (158)                     | Full, Window      | Yes                 | Yes                  |
-| prunus06     | persica (149)                        | Full, Window      | No                  | Yes                  |
-| cyan03       | mainland                             | Full, Window      | Yes                 | Yes                  |
+| Inversion ID | Groups (Samples)                       | Regions Available | Genotypes Available | Boundaries Available |
+| ------------ | -------------------------------------- | ----------------- | ------------------- | -------------------- |
+| ag1000g-2La  | gambiae (81)                           | Full              | Yes                 | Yes                  |
+| ag1000g-2Rb  | gambiae (81), gambiae-nohomostd (79)   | Full              | Yes                 | Yes                  |
+| ag1000g-2Rbc | coluzzii (69)                          | Full              | Yes                 | Yes                  |
+| ag1000g-2Rd  | coluzzii (69)                          | Full, Window      | No                  | Yes                  |
+| dgrp2-In2Lt  | DGRPv2 (198)                           | Full              | Yes                 | Yes                  |
+| dgrp2-In2Rns | DGRPv2 (198)                           | Full              | Yes                 | Yes                  |
+| dgrp2-In3Rp  | DGRPv2 (198)                           | Full              | Yes                 | Yes                  |
+| dgrp2-In3Rmo | DGRPv2 (198)                           | Full              | Yes                 | Yes                  |
+| dgrp2-In3Rk  | DGRPv2 (198)                           | Full              | Yes                 | Yes                  |
+| pet05.01     | petiolaris (158)                       | Full              | Yes                 | Yes                  |
+| pet09.01     | petiolaris (158)                       | Full              | Yes                 | Yes                  |
+| pet11.01     | petiolaris (158), fallax (230)         | Full, Window      | Yes                 | Yes                  |
+| pet17.02     | petiolaris (158)                       | Full, Window      | Yes                 | Yes                  |
+| prunus06     | persica (149)                          | Full, Window      | No                  | Yes                  |
+| cyan03       | mainland (111), mainland-nohomo2 (109) | Full, Window      | Yes                 | Yes                  |
 
 Genotype labels are provided under the `inversion_genotypes` directory, and inversion boundaries are provided under the `inversion_boundaries` directory.
 

@@ -66,6 +66,11 @@ cyan03_mainland:
   chrom: chromo.03
   sample_ids: sample_lists/cyanistes_mainland_ids.txt
   window: inversion_boundaries/cyan03.bed
+cyan03_mainland-nohomo2:
+  input: input_files/BLUE2020VCF.vcf.gz
+  chrom: chromo.03
+  sample_ids: sample_lists/cyanistes_mainland-nohomo2_ids.txt
+  window: inversion_boundaries/cyan03.bed
 prunus06_persica:
   input: input_files/SNP.vcf.gz
   chrom: Pp06
