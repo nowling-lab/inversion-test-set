@@ -14,355 +14,52 @@
 
 configfile: "config.yaml"
 
+import yaml
+
+with open("inversions.yaml", "r") as fl:
+    inversions = yaml.safe_load(fl)
+
+print(inversions)
+
 ## process Drosophila Genetics Reference Panel v2 VCFs
 rule filter_dgrp2_vcf:
     input:
         vcf="input_files/dgrp2.vcf"
     output:
-        filtered_vcf="data/dgrp2/dgrp2.biallelic.vcf"
+        filtered_vcf="data/dgrp2/dgrp2_{chrom}.biallelic.vcf.gz"
     threads:
         1
     shell:
-        "vcftools --vcf {input.vcf} --min-alleles 2 --max-alleles 2 --remove-indels --maf 0.01 --recode --stdout --remove-indv line_348 --remove-indv line_350 --remove-indv line_358 --remove-indv line_385 --remove-indv line_392 --remove-indv line_395 --remove-indv line_399 > {output.filtered_vcf}"
-
-rule split_dgrp2_by_chrom:
-    input:
-        vcf="data/dgrp2/dgrp2.biallelic.vcf"
-    output:
-        chrom_vcf="data/dgrp2/dgrp2_{chrom}.biallelic.vcf"
-    threads:
-        1
-    shell:
-        "vcftools --vcf {input.vcf} --chr {wildcards.chrom} --recode --stdout > {output.chrom_vcf}"
-
-rule dgrp2_to_vcf_gz:
-    input:
-        vcf="data/dgrp2/dgrp2_{chrom}.biallelic.vcf"
-    output:
-        vcfgz="data/dgrp2/dgrp2_{chrom}.biallelic.vcf.gz"
-    threads:
-        1
-    shell:
-        "gzip -k {input.vcf}"
-
-rule dgrp2_to_bed:
-    input:
-        vcf="data/dgrp2/dgrp2_{chrom}.biallelic.vcf"
-    output:
-        bed="data/dgrp2/dgrp2_{chrom}.biallelic.bed"
-    threads:
-        1
-    shell:
-        "plink1.9 --vcf {input.vcf} --make-bed --allow-extra-chr --out data/dgrp2/dgrp2_{wildcards.chrom}.biallelic"
-
-rule dgrp2_to_raw:
-    input:
-        bed="data/dgrp2/dgrp2_{chrom}.biallelic.bed"
-    output:
-        raw="data/dgrp2/dgrp2_{chrom}.biallelic.raw"
-    threads:
-        1
-    shell:
-        "plink1.9 --bfile data/dgrp2/dgrp2_{wildcards.chrom}.biallelic --recode A --allow-extra-chr --out data/dgrp2/dgrp2_{wildcards.chrom}.biallelic"
-
-rule dgrp2_to_inveRsion:
-    input:
-        raw="data/dgrp2/dgrp2_{chrom}.raw"
-    output:
-        inveRsion="data/dgrp2/dgrp2_{chrom}.inveRsion"
-    threads:
-        1
-    shell:
-        "scripts/raw_to_inveRsion --input-raw {input.raw} --output-txt {output.inveRsion}"
+        "vcftools --vcf {input.vcf} --min-alleles 2 --max-alleles 2 --remove-indels --maf 0.01 --recode --stdout --remove-indv line_348 --remove-indv line_350 --remove-indv line_358 --remove-indv line_385 --remove-indv line_392 --remove-indv line_395 --remove-indv line_399 --chr {wildcards.chrom} | gzip -c > {output.filtered_vcf}"
         
-## Process 1000 Anopheles Genomes VCFs
-rule select_ag1000g_samples:
+rule generate_inversion_vcf:
     input:
-        vcf="input_files/ag1000g.phase1.ar3.pass.biallelic.{chrom}.vcf.gz"
-    output:
-        vcf="data/ag1000g/ag1000g_{chrom}_bfaso.vcf.gz"
-    threads:
-        1
-    shell:
-        "vcftools --gzvcf {input.vcf} --recode --stdout --keep sample_lists/ag1000g_bfm_bfs_ids.txt --remove-indels --maf 0.01 | gzip -c > {output.vcf}"
-
-rule select_ag1000g_gambiae_samples:
-    input:
-        vcf="data/ag1000g/ag1000g_{chrom}_bfaso.vcf.gz"
-    output:
-        vcf="data/ag1000g/ag1000g_{chrom}_bfaso_gambiae.vcf.gz"
-    threads:
-        1
-    shell:
-        "vcftools --gzvcf {input.vcf} --recode --stdout --keep sample_lists/ag1000g_bfs_ids.txt --maf 0.01 | gzip -c > {output.vcf}"
-
-rule select_ag1000g_gambiae_nohomostd:
-    input:
-        vcf="data/ag1000g/ag1000g_2R_bfaso_gambiae.vcf.gz"
-    output:
-        vcf="data/ag1000g/ag1000g_2R_bfaso_gambiae_nohomostd.vcf.gz"
-    threads:
-        1
-    shell:
-        "vcftools --gzvcf {input.vcf} --recode --stdout --keep sample_lists/ag1000g_bfs_2Rb_nohomostd_ids.txt --maf 0.01 | gzip -c > {output.vcf}"
-
-rule select_ag1000g_coluzzii_samples:
-    input:
-        vcf="data/ag1000g/ag1000g_{chrom}_bfaso.vcf.gz"
-    output:
-        vcf="data/ag1000g/ag1000g_{chrom}_bfaso_coluzzii.vcf.gz"
-    threads:
-        1
-    shell:
-        "vcftools --gzvcf {input.vcf} --recode --stdout --keep sample_lists/ag1000g_bfm_ids.txt --maf 0.01 | gzip -c > {output.vcf}"
-
-rule ag1000g_to_bed:
-    input:
-        vcf="data/ag1000g/ag1000g_{chrom}.vcf.gz"
-    output:
-        bed="data/ag1000g/ag1000g_{chrom}.bed"
-    threads:
-        1
-    shell:
-        "plink1.9 --vcf {input.vcf} --set-missing-var-ids '@_#_\$1_\$2' --make-bed --allow-extra-chr --out data/ag1000g/ag1000g_{wildcards.chrom}"
-
-rule ag1000g_to_raw:
-    input:
-        bed="data/ag1000g/ag1000g_{chrom}.bed"
-    output:
-        raw="data/ag1000g/ag1000g_{chrom}.raw"
-    threads:
-        1
-    shell:
-        "plink1.9 --bfile data/ag1000g/ag1000g_{wildcards.chrom} --recode A --allow-extra-chr --out data/ag1000g/ag1000g_{wildcards.chrom}"
-
-rule ag1000g_to_inveRsion:
-    input:
-        raw="data/ag1000g/ag1000g_{chrom}.raw"
-    output:
-        inveRsion="data/ag1000g/ag1000g_{chrom}.inveRsion"
-    threads:
-        1
-    shell:
-        "scripts/raw_to_inveRsion --input-raw {input.raw} --output-txt {output.inveRsion}"
-
-## Process Helianthus petiolaris data
-# from https://github.com/owensgl/wild_gwas_2018/blob/master/MDS_outliers/Ha412HO/petiolaris/Ha412HO_inv.v3.pcasites.vcf
-pet_inv_chromosomes = ["Ha412HOChr05",
-                       "Ha412HOChr09",
-                       "Ha412HOChr11",
-                       "Ha412HOChr17"]
-
-rule split_pet_by_chrom:
-    input:
-        vcf="input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz"
+        lambda w: inversions[w.inversion]["input"]
     params:
-        exclusions=lambda w: " ".join(["--remove-indv {}".format(name) for name in config["pet_exclusions"]])
+        chrom=lambda w: inversions[w.inversion]["chrom"],
+        keep=lambda w: "" if "sample_ids" not in inversions[w.inversion] else "--keep {}".format(inversions[w.inversion]["sample_ids"]),
+        sites=lambda w: "" if w.region == "full" else "--bed {}".format(inversions[w.inversion]["window"]),
+        exclude=lambda w: "" if "exclude" not in inversions[w.inversion] else " ".join("--remove-indv {}".format(indv) for indv in inversions[w.inversion]["exclude"])
     output:
-        chrom_vcf="data/petiolaris/petiolaris_all_{chrom}.vcf.gz"
+        "data/output_files/{inversion}_{region}.vcf.gz"
     threads:
         1
     shell:
-        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --maf 0.01 {params.exclusions} --keep sample_lists/H_petiolaris_both_ids.txt --recode --stdout | gzip -c > {output.chrom_vcf}"
-
-rule split_pet_pet_by_chrom:
-    input:
-        vcf="data/petiolaris/petiolaris_all_{chrom}.vcf.gz"
-    params:
-        exclusions=lambda w: " ".join(["--remove-indv {}".format(name) for name in config["pet_exclusions"]])
-    output:
-        chrom_vcf="data/petiolaris/petiolaris_petiolaris_{chrom}.vcf.gz"
-    threads:
-        1
-    shell:
-        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --maf 0.01 {params.exclusions} --keep sample_lists/H_petiolaris_petiolaris_ids.txt --recode --stdout | gzip -c > {output.chrom_vcf}"
-
-rule split_pet_fallax_by_chrom:
-    input:
-        vcf="data/petiolaris/petiolaris_all_{chrom}.vcf.gz"
-    params:
-        exclusions=lambda w: " ".join(["--remove-indv {}".format(name) for name in config["pet_exclusions"]])
-    output:
-        chrom_vcf="data/petiolaris/petiolaris_fallax_{chrom}.vcf.gz"
-    threads:
-        1
-    shell:
-        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --maf 0.01 {params.exclusions} --keep sample_lists/H_petiolaris_fallax_ids.txt --recode --stdout | gzip -c > {output.chrom_vcf}"
-
-## Process blue tit (Cyanistes caeruleus) data
-cyanistes_inv_chromosomes = ["chromo.03"]
-
-rule split_cyanistes_by_chrom:
-    input:
-        vcf="input_files/BLUE2020VCF.vcf.gz"
-    output:
-        chrom_vcf="data/cyanistes/cyanistes_all_{chrom}_full.vcf.gz"
-    threads:
-        1
-    shell:
-        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --recode --stdout | gzip -c > {output.chrom_vcf}"
-
-rule split_cyanistes_corsica_by_chrom:
-    input:
-        vcf="data/cyanistes/cyanistes_all_{chrom}_full.vcf.gz"
-    output:
-        chrom_vcf="data/cyanistes/cyanistes_corsica_{chrom}_full.vcf.gz"
-    threads:
-        1
-    shell:
-        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --keep sample_lists/cyanistes_corsica_ids.txt --recode --stdout | gzip -c > {output.chrom_vcf}"
-
-rule split_cyanistes_mainland_by_chrom:
-    input:
-        vcf="data/cyanistes/cyanistes_all_{chrom}_full.vcf.gz"
-    output:
-        chrom_vcf="data/cyanistes/cyanistes_mainland_{chrom}_full.vcf.gz"
-    threads:
-        1
-    shell:
-        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --keep sample_lists/cyanistes_mainland_ids.txt --recode --stdout | gzip -c > {output.chrom_vcf}"
-
-rule cyanistes_chr03_window:
-    input:
-        "data/cyanistes/{dataset}_chromo.03_full.vcf.gz"
-    output:
-        "data/cyanistes/{dataset}_chromo.03_window.vcf.gz"
-    threads:
-        1
-    shell:
-        "vcftools --gzvcf {input} --chr chromo.03 --from-bp 11838789 --to-bp 14661550 --recode --stdout | gzip -c > {output}"
-
-## Process peach (Prunus persica) data
-prunus_inv_chromosomes = ["Pp06"]
-
-rule split_prunus_by_chrom:
-    input:
-        vcf="input_files/SNP.vcf.gz"
-    output:
-        chrom_vcf="data/prunus/prunus_all_{chrom}_full.vcf.gz"
-    threads:
-        1
-    shell:
-        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --recode --stdout | gzip -c > {output.chrom_vcf}"
-
-rule split_prunus_persica_by_chrom:
-    input:
-        vcf="data/prunus/prunus_all_{chrom}_full.vcf.gz"
-    output:
-        chrom_vcf="data/prunus/prunus_persica_{chrom}_full.vcf.gz"
-    threads:
-        1
-    shell:
-        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --keep sample_lists/prunus_persica_ids.txt --recode --stdout | gzip -c > {output.chrom_vcf}"
-
-rule split_prunus_kansuensis_by_chrom:
-    input:
-        vcf="data/prunus/prunus_all_{chrom}_full.vcf.gz"
-    output:
-        chrom_vcf="data/prunus/prunus_kansuensis_{chrom}_full.vcf.gz"
-    threads:
-        1
-    shell:
-        "vcftools --gzvcf {input.vcf} --chr {wildcards.chrom} --keep sample_lists/prunus_kansuensis_ids.txt --recode --stdout | gzip -c > {output.chrom_vcf}"
-
-rule prunus_pp06_window:
-    input:
-        vcf="data/prunus/{dataset}_Pp06_full.vcf.gz"
-    output:
-        chrom_vcf="data/prunus/{dataset}_Pp06_window.vcf.gz"
-    threads:
-        1
-    shell:
-        "vcftools --gzvcf {input.vcf} --chr Pp06 --from-bp 27959880 --to-bp 29634101 --recode --stdout | gzip -c > {output.chrom_vcf}"
-
-## Parus major
-parus_chromosomes = ["1A"]
-
-rule split_parus_by_chrom:
-    input:
-        "input_files/GreatTits_PolyMonoMinorHom1.10_NoUN_NoScaffolds.vcf.gz"
-    output:
-        "data/parus/parus_all_{chrom}_full.vcf.gz"
-    threads:
-        1
-    shell:
-        "vcftools --gzvcf {input} --chr {wildcards.chrom} --recode --stdout | gzip -c > {output}"
+        "vcftools --gzvcf {input} --chr {params.chrom} {params.keep} {params.sites} {params.exclude} --recode --stdout | gzip -c > {output}"
 
 # define data sets here so we can create rules that depend
 # on individual data sets and the entire set
-dgrp=expand("data/dgrp2/dgrp2_{chrom}.biallelic.{format}",
-            chrom=["2L", "2R", "3R", "3L"],
-            format=config["formats"])
+output_files = []
+for name, params in inversions.items():
+    flname = "data/output_files/{}_full.vcf.gz".format(name)
+    output_files.append(flname)
 
-ag1000g_bfaso=expand("data/ag1000g/ag1000g_{chrom}_bfaso.{format}",
-                     chrom=["2L", "2R", "3L"],
-                     format=config["formats"])
+    if "window" in params:
+        flname = "data/output_files/{}_window.vcf.gz".format(name)
+        output_files.append(flname)
 
-ag1000g_bfaso_gambiae=expand("data/ag1000g/ag1000g_{chrom}_bfaso_gambiae.{format}",
-                             chrom=["2L", "2R", "3L"],
-                             format=config["formats"])
-
-ag1000g_bfaso_gambiae_nohomostd=expand("data/ag1000g/ag1000g_2R_bfaso_gambiae_nohomostd.{format}",
-                                     format=config["formats"])
-
-ag1000g_bfaso_coluzii=expand("data/ag1000g/ag1000g_{chrom}_bfaso_coluzzii.{format}",
-                             chrom=["2L", "2R", "3L"],
-                             format=config["formats"])
-
-petiolaris=expand("data/petiolaris/petiolaris_{dataset}_{chrom}.vcf.gz",
-                  chrom=pet_inv_chromosomes,
-                  dataset=["all", "petiolaris", "fallax"])
-
-cyanistes=expand("data/cyanistes/{dataset}_{chrom}_{region}.vcf.gz",
-                 chrom=cyanistes_inv_chromosomes,
-                 dataset=["cyanistes_all", "cyanistes_corsica", "cyanistes_mainland"],
-                 region=["window", "full"])
-
-prunus=expand("data/prunus/{dataset}_{chrom}_{region}.vcf.gz",
-              chrom=prunus_inv_chromosomes,
-              dataset=["prunus_all", "prunus_persica", "prunus_kansuensis"],
-              region=["full", "window"])
-
-parus=expand("data/parus/parus_all_{chrom}_full.vcf.gz",
-              chrom=parus_chromosomes)
-
-
-## Top-level rules
-rule prepare_dgrp2:
-    input:
-        dgrp
-        
-rule prepare_ag1000g:
-    input:
-        bfaso=ag1000g_bfaso,
-        bfaso_gambiae=ag1000g_bfaso_gambiae,
-        bfaso_gambiae_nohet=ag1000g_bfaso_gambiae_nohomostd,
-        bfaso_coluzzii=ag1000g_bfaso_coluzii
-
-rule prepare_petiolaris:
-    input:
-        petiolaris
-
-rule prepare_cyanistes:
-    input:
-        cyanistes
-
-rule prepare_prunus:
-    input:
-        prunus
-
-rule prepare_parus:
-    input:
-        parus
+output_files.sort()
 
 rule prepare_all:
     input:
-        dgrp=dgrp,
-        bfaso=ag1000g_bfaso,
-        bfaso_gambiae=ag1000g_bfaso_gambiae,
-        bfaso_gambiae_nohet=ag1000g_bfaso_gambiae_nohomostd,
-        bfaso_coluzzii=ag1000g_bfaso_coluzii,
-        petiolaris=petiolaris,
-        cyanistes=cyanistes,
-        prunus=prunus,
-        parus=parus
+        output_files

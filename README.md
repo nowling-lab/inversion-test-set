@@ -4,37 +4,23 @@ We composed a benchmark data set for evaluating SNP-based inversion detection me
 
 ## Overview of Data Sets
 
-| Source | Group | Samples | Inversion | Genotype Labels Included | Allele Freq. | Genotype Freq. | Inversion Boundaries Included | Size (Mb, %) |
-| ------ | ----- | ------- | --------- | ------------------------ | ------------ | -------------- | ----------------------------- | ------------ |
-| Ag1000g | An. gambaie and coluzzii, B. Faso | 150 | 2La | Yes | 94.7% | | Yes | 21.6 Mb |
-| Ag1000g | An. gambaie and coluzzii, B. Faso | 150 | 2Rb | Yes | 59.3% | | Yes | 7.55 Mb |
-| Ag1000g | An. gambaie, B. Faso | 81 | 2La | Yes | 90.7% | | Yes | 21.6 Mb |
-| Ag1000g | An. gambaie, B. Faso | 81 | 2Rb | Yes | 82.1% | | Yes | 7.55 Mb |
-| Ag1000g | An. gambaie, B. Faso (No homo std) | 79 | 2Rb | Yes | | | Yes | 7.55 Mb |
-| Ag1000g | An. coluzzii, B. Faso | 69 | 2Rb | Yes | 31.1% | | Yes | 7.55 Mb |
-| Ag1000g | An. coluzzii, B. Faso | 69 | 2Rc | No | | | Yes | 4.7 Mb |
-| Ag1000g | An. coluzzii, B. Faso | 69 | 2Rd | No | | | Yes | 10.9 Mb |
-| DGRPv2  | D. melanogaster | 198 | In(2L)t | Yes | 14.4% | | Yes | 10.9 Mb |
-| DGRPv2  | D. melanogaster | 198 | In(2R)ns | Yes | 12.1% | | Yes | 15.0 Mb |
-| DGRPv2  | D. melanogaster | 198 | In(3R)Mo | Yes | 18.7% | | Yes | 7.6 Mb |
-| DGRPv2  | D. melanogaster | 198 | In(3R)P | Yes | 7.1% | | Yes | 8.3 Mb |
-| DGRPv2  | D. melanogaster | 198 | In(3R)K | Yes | 8.1% | | Yes | 7.6 Mb |
-| Todesco | H. petiolaris (both varieties) | 386 | Ha412HOChr05.1 | Yes | | | Yes | 28 Mb |
-| Todesco | H. petiolaris (both varieties) | 386 | Ha412HOChr09.1 | Yes | | | Yes | 32 Mb |
-| Todesco | H. petiolaris (both varieties) | 386 | Ha412HOChr11.1 | Yes | | | Yes | 62 Mb |
-| Todesco | H. petiolaris (both varieties) | 386 | Ha412HOChr17.3 | Yes | | | Yes | 11 Mb |
-| Todesco | H. petiolaris petiolaris | 158 | Ha412HOChr05.1 | Yes | | | Yes | 28 Mb |
-| Todesco | H. petiolaris petiolaris | 158 | Ha412HOChr09.1 | Yes | | | Yes | 32 Mb |
-| Todesco | H. petiolaris petiolaris | 158 | Ha412HOChr11.1 | Yes | | | Yes | 62 Mb |
-| Todesco | H. petiolaris fallax | 230 | Ha412HOChr05.1 | Yes | | | Yes | 28 Mb |
-| Todesco | H. petiolaris fallax | 230 | Ha412HOChr09.1 | Yes | | | Yes | 32 Mb |
-| Todesco | H. petiolaris fallax | 230 | Ha412HOChr11.1 | Yes | | | Yes | 62 Mb |
-| Todesco | H. petiolaris fallax | 230 | Ha412HOChr17.3 | Yes | | | Yes | 11 Mb |
-| Guan | Prunus persica and kansuensis | 186 | Pp06 | No | | | Yes | 1.67 Mb |
-| Guan | Prunus persica | 149 | Pp06 | No | | | Yes | 1.67 Mb |
-| Perrier | Cyanistes caeruleus | 454 | chromo.03 | No | | | Yes | 2.8 Mb |
-| Perrier | Cyanistes caeruleus (corsica) | 343 | chromo.03 | No | | | Yes | 2.8 Mb |
-| Perrier | Cyanistes caeruleus (mainland) | 111 | chromo.03 | Yes | | | Yes | 2.8 Mb |
+| Inversion ID | Groups (Samples)                     | Regions Available | Genotypes Available | Boundaries Available |
+| ------------ | ------------------------------------ | ----------------- | ------------------- | -------------------- |
+| ag1000g-2La  | gambiae (81)                         | Full              | Yes                 | Yes                  |
+| ag1000g-2Rb  | gambiae (81), gambiae-nohomostd (79) | Full              | Yes                 | Yes                  |
+| ag1000g-2Rbc | coluzzii (69)                        | Full              | Yes                 | Yes                  |
+| ag1000g-2Rd  | coluzzii (69)                        | Full, Window      | No                  | Yes                  |
+| dgrp2-In2Lt  | DGRPv2 (198)                         | Full              | Yes                 | Yes                  |
+| dgrp2-In2Rns | DGRPv2 (198)                         | Full              | Yes                 | Yes                  |
+| dgrp2-In3Rp  | DGRPv2 (198)                         | Full              | Yes                 | Yes                  |
+| dgrp2-In3Rmo | DGRPv2 (198)                         | Full              | Yes                 | Yes                  |
+| dgrp2-In3Rk  | DGRPv2 (198)                         | Full              | Yes                 | Yes                  |
+| pet05.01     | petiolaris (158)                     | Full              | Yes                 | Yes                  |
+| pet09.01     | petiolaris (158)                     | Full              | Yes                 | Yes                  |
+| pet11.01     | petiolaris (158), fallax (230)       | Full, Window      | Yes                 | Yes                  |
+| pet17.02     | petiolaris (158)                     | Full, Window      | Yes                 | Yes                  |
+| prunus06     | persica (149)                        | Full, Window      | Yes                 | Yes                  |
+| cyan03       | mainland                             | Full, Window      | Yes                 | Yes                  |
 
 Genotype labels are provided under the `inversion_genotypes` directory, and inversion boundaries are provided under the `inversion_boundaries` directory.
 
