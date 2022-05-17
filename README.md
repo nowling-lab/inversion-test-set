@@ -8,7 +8,7 @@ We composed a benchmark data set for evaluating SNP-based inversion detection me
 | ------------ | -------------------------------------- | ----------------- | ------------------- | -------------------- |
 | ag1000g-2La  | gambiae (81)                           | Full              | Yes                 | Yes                  |
 | ag1000g-2Rb  | gambiae (81), gambiae-nohomostd (79), coluzzii (69) | Full | Yes                 | Yes                  |
-| ag1000g-2Rc  | coluzzii (69)                          | Full              | No                  | Yes                  |
+| ag1000g-2Rc  | coluzzii (69), coluzzii-nohomo1 (68)   | Full, Window      | No                  | Yes                  |
 | ag1000g-2Rd  | coluzzii (69)                          | Full, Window      | No                  | Yes                  |
 | dgrp2-In2Lt  | DGRPv2 (198)                           | Full              | Yes                 | Yes                  |
 | dgrp2-In2Rns | DGRPv2 (198)                           | Full              | Yes                 | Yes                  |
