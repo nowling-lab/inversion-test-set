@@ -20,6 +20,11 @@ ag1000g-2Rc_coluzzii:
   chrom: 2R
   sample_ids: sample_lists/ag1000g_bfm_ids.txt
   window: inversion_boundaries/ag1000g-2Rc.bed
+ag1000g-2Rc_coluzzii-nohomo1:
+  input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
+  chrom: 2R
+  sample_ids: sample_lists/ag1000g_bfm_2Rb_nohomo1_ids.txt
+  window: inversion_boundaries/ag1000g-2Rc.bed
 ag1000g-2Rd_coluzzii:
   input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
   chrom: 2R
