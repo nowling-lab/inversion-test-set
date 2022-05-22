@@ -44,7 +44,7 @@ rule generate_inversion_vcf_full:
     threads:
         1
     shell:
-        "vcftools --gzvcf {input} --chr {params.chrom} {params.keep} {params.exclude} --recode --stdout | gzip -c > {output}"
+        "vcftools --gzvcf {input} --chr {params.chrom} {params.keep} {params.exclude} --maf 0.05 --recode --stdout | gzip -c > {output}"
 
 rule generate_inversion_vcf_window:
     input:
@@ -59,8 +59,7 @@ rule generate_inversion_vcf_window:
     threads:
         1
     shell:
-        "vcftools --gzvcf {input} --chr {params.chrom} {params.keep} {params.sites} {params.exclude} --recode --stdout | gzip -c > {output}"
-
+        "vcftools --gzvcf {input} --chr {params.chrom} {params.keep} {params.sites} {params.exclude} --maf 0.05 --recode --stdout | gzip -c > {output}"
         
 # define data sets here so we can create rules that depend
 # on individual data sets and the entire set

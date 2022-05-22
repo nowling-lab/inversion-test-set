@@ -4,25 +4,74 @@ We composed a benchmark data set for evaluating SNP-based inversion detection me
 
 ## Overview of Data Sets
 
-| Inversion ID | Groups (Samples)                       | Regions Available | Genotypes Available | Boundaries Available |
-| ------------ | -------------------------------------- | ----------------- | ------------------- | -------------------- |
-| ag1000g-2La  | gambiae (81)                           | Full              | Yes                 | Yes                  |
-| ag1000g-2Rb  | gambiae (81), gambiae-nohomostd (79), coluzzii (69) | Full | Yes                 | Yes                  |
-| ag1000g-2Rc  | coluzzii (69), coluzzii-nohomo1 (68)   | Full, Window      | No                  | Yes                  |
-| ag1000g-2Rd  | coluzzii (69)                          | Full, Window      | No                  | Yes                  |
-| dgrp2-In2Lt  | DGRPv2 (198)                           | Full              | Yes                 | Yes                  |
-| dgrp2-In2Rns | DGRPv2 (198)                           | Full              | Yes                 | Yes                  |
-| dgrp2-In3Rp  | DGRPv2 (198)                           | Full              | Yes                 | Yes                  |
-| dgrp2-In3Rmo | DGRPv2 (198)                           | Full              | Yes                 | Yes                  |
-| dgrp2-In3Rk  | DGRPv2 (198)                           | Full              | Yes                 | Yes                  |
-| pet05.01     | petiolaris (158)                       | Full              | Yes                 | Yes                  |
-| pet09.01     | petiolaris (158)                       | Full              | Yes                 | Yes                  |
-| pet11.01     | petiolaris (158), fallax (230)         | Full, Window      | Yes                 | Yes                  |
-| pet17.02     | petiolaris (158)                       | Full, Window      | Yes                 | Yes                  |
-| prunus06     | persica (149)                          | Full, Window      | No                  | Yes                  |
-| cyan03       | mainland (111), mainland-nohomo2 (109) | Full, Window      | No                  | Yes                  |
-
 Genotype labels are provided under the `inversion_genotypes` directory, and inversion boundaries are provided under the `inversion_boundaries` directory.
+
+| Inversion ID | Data Set                               |
+| ------------ | -------------------------------------- |
+| ag1000g-2La  | 1000 Anopheles genomes                 |
+| ag1000g-2Rb  | 1000 Anopheles genomes                 |
+| ag1000g-2Rc  | 1000 Anopheles genomes                 |
+| ag1000g-2Rd  | 1000 Anopheles genomes                 |
+| dgrp2-In2Lt  | DGRPv2                                 |
+| dgrp2-In2Rns | DGRPv2                                 |
+| dgrp2-In3Rp  | DGRPv2                                 |
+| dgrp2-In3Rmo | DGRPv2                                 |
+| dgrp2-In3Rk  | DGRPv2                                 |
+| pet05.01     | UBC Sunflower Genome Project           |
+| pet09.01     | UBC Sunflower Genome Project           |
+| pet11.01     | UBC Sunflower Genome Project           |
+| pet17.01     | UBC Sunflower Genome Project           |
+| pet17.02     | UBC Sunflower Genome Project           |
+| pet17.03     | UBC Sunflower Genome Project           |
+| pet17.04     | UBC Sunflower Genome Project           |
+| prunus06     | Guan, et al. (2021)                    |
+| cyan03       | Perrier, et al. (2020)                 |
+
+
+### Positives
+
+| Inversion ID | Groups (Samples)                       | Genotypes Available |
+| ------------ | -------------------------------------- | ------------------- |
+| ag1000g-2La  | gambiae (81)                           | Yes                 |
+| ag1000g-2Rb  | gambiae (81), gambiae-nohomostd (79), coluzzii (69) | Yes    |
+| ag1000g-2Rc  | coluzzii (69), coluzzii-nohomo1 (68)   | Predicted           |
+| ag1000g-2Rd  | coluzzii (69)                          | No                  |
+| dgrp2-In2Lt  | DGRPv2 (198)                           | Yes                 |
+| dgrp2-In2Rns | DGRPv2 (198)                           | Yes                 |
+| dgrp2-In3Rp  | DGRPv2 (198)                           | Yes                 |
+| dgrp2-In3Rmo | DGRPv2 (198)                           | Yes                 |
+| dgrp2-In3Rk  | DGRPv2 (198)                           | Yes                 |
+| pet05.01     | petiolaris (158)                       | Yes                 |
+| pet09.01     | petiolaris (158), fallax (230)         | Yes                 |
+| pet11.01     | petiolaris (158), fallax (230)         | Yes                 |
+| pet17.01     | petiolaris (158), fallax (230)         | Yes                 |
+| pet17.02     | petiolaris (158)                       | Yes                 |
+| pet17.03     | fallax (230), niveus (86)              | Yes                 |
+| pet17.04     | petiolaris (158)                       | Yes                 |
+| prunus06     | persica (149)                          | No                  |
+| cyan03       | mainland (111), mainland-nohomo2 (109) | Predicted           |
+
+### Negatives
+
+| Inversion ID | Groups (Samples)                       |
+| ------------ | -------------------------------------- |
+| ag1000g-3L   | gambiae (81), coluzzii (69)            |
+| pet05.01     | niveus (86)                            |
+| pet11.01     | niveus (86)                            |
+| pet17.02     | niveus (86), fallax (230)              |
+| prunus06     | kansuensis (37)                        |
+| cyan03       | corsica (343)                          |
+
+### Complicated
+| Inversion ID | Groups (Samples)                       | Comments
+| ------------ | -------------------------------------- | ---------------------------- |
+| ag1000g-2Rc  | gambiae (81)                           | There are associated SNPs in the 2Rc region but not a clear three-stripe pattern. Either a small inversion or other something else. |
+| ag1000g-2Rd  | gambiae (81)                           | There are associated SNPs in the 2Rd region but not a clear three-stripe pattern. Either a small inversion or something else. |
+| pet05.01     | fallax (230)                           | Todesco, et al. (2020) provides genotype labels, but we do not see evidence of associated SNPs in the inversion region. |
+| pet09.01     | niveus (86)                            | Todesco, et al. (2020) genotype labels suggest that one sample is heterozygous, but we do not see evidence of associated SNPs in the inversion region. |
+| pet17.01     | niveus (86)                            | Todesco, et al. (2020) genotype labels do not suggest any inversions, but we there are some stripe patterns in the PCA and associated SNPs in the region. |
+| pet17.03, pet17.04 |  | The pet17.03 region includes pet17.04.  Petiolaris have the associated SNPs only in the pet17.04 region, while fallax and niveus have associated SNPs in the larger pet17.03 region. |
+
 
 ### Evaluation Recommendations
 
