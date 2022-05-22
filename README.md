@@ -12,6 +12,7 @@ Genotype labels are provided under the `inversion_genotypes` directory, and inve
 | ag1000g-2Rb  | 1000 Anopheles genomes                 |
 | ag1000g-2Rc  | 1000 Anopheles genomes                 |
 | ag1000g-2Rd  | 1000 Anopheles genomes                 |
+| ag1000g-2Ru  | 1000 Anopheles genomes                 |
 | dgrp2-In2Lt  | DGRPv2                                 |
 | dgrp2-In2Rns | DGRPv2                                 |
 | dgrp2-In3Rp  | DGRPv2                                 |
@@ -35,7 +36,8 @@ Genotype labels are provided under the `inversion_genotypes` directory, and inve
 | ag1000g-2La  | gambiae (81)                           | Yes                 |
 | ag1000g-2Rb  | gambiae (81), gambiae-nohomostd (79), coluzzii (69) | Yes    |
 | ag1000g-2Rc  | coluzzii (69), coluzzii-nohomo1 (68)   | Predicted           |
-| ag1000g-2Rd  | coluzzii (69)                          | No                  |
+| ag1000g-2Rd  | coluzzii (69)                          | Predicted           |
+| ag1000g-2Ru  | coluzzii (69)                          | Predicted           |
 | dgrp2-In2Lt  | DGRPv2 (198)                           | Yes                 |
 | dgrp2-In2Rns | DGRPv2 (198)                           | Yes                 |
 | dgrp2-In3Rp  | DGRPv2 (198)                           | Yes                 |
@@ -65,7 +67,8 @@ Genotype labels are provided under the `inversion_genotypes` directory, and inve
 ### Complicated
 | Inversion ID | Groups (Samples)                       | Comments
 | ------------ | -------------------------------------- | ---------------------------- |
-| ag1000g-2Rc  | gambiae (81)                           | There are associated SNPs in the 2Rc region but not a clear three-stripe pattern. Either a small inversion or other something else. |
+| ag1000g-2Rc  | gambiae (81)                           | There are associated SNPs in the 2Rc region but not a clear three-stripe pattern. Either a small inversion or something else. |
+| ag1000g-2Rd  | coluzzii (69)                          | We get much better results if we do the PCA on the part of 2Rd that does not include 2Ru. Use 2Rdtail for PCA, 2Rd for actual boundaries. |
 | ag1000g-2Rd  | gambiae (81)                           | There are associated SNPs in the 2Rd region but not a clear three-stripe pattern. Either a small inversion or something else. |
 | pet05.01     | fallax (230)                           | Todesco, et al. (2020) provides genotype labels, but we do not see evidence of associated SNPs in the inversion region. |
 | pet09.01     | niveus (86)                            | Todesco, et al. (2020) genotype labels suggest that one sample is heterozygous, but we do not see evidence of associated SNPs in the inversion region. |

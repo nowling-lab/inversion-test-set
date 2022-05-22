@@ -42,6 +42,26 @@ ag1000g-2Rd_gambiae:
   chrom: 2R
   sample_ids: sample_lists/ag1000g_bfs_ids.txt
   window: inversion_boundaries/ag1000g-2Rd.bed
+ag1000g-2Rdtail_coluzzii:
+  input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
+  chrom: 2R
+  sample_ids: sample_lists/ag1000g_bfm_ids.txt
+  window: inversion_boundaries/ag1000g-2Rdtail.bed
+ag1000g-2Rdtail_gambiae:
+  input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
+  chrom: 2R
+  sample_ids: sample_lists/ag1000g_bfs_ids.txt
+  window: inversion_boundaries/ag1000g-2Rdtail.bed
+ag1000g-2Ru_coluzzii:
+  input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
+  chrom: 2R
+  sample_ids: sample_lists/ag1000g_bfm_ids.txt
+  window: inversion_boundaries/ag1000g-2Ru.bed
+ag1000g-2Ru_gambiae:
+  input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
+  chrom: 2R
+  sample_ids: sample_lists/ag1000g_bfs_ids.txt
+  window: inversion_boundaries/ag1000g-2Ru.bed
 ag1000g-3L_coluzzii:
   input: input_files/ag1000g.phase1.ar3.pass.biallelic.3L.vcf.gz
   chrom: 3L
