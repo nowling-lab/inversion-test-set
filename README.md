@@ -36,7 +36,7 @@ Genotype labels are provided under the `inversion_genotypes` directory, and inve
 | ag1000g-2La  | gambiae (81)                           | Yes                 |
 | ag1000g-2Rb  | gambiae (81), gambiae-nohomostd (79), coluzzii (69) | Yes    |
 | ag1000g-2Rc  | coluzzii (69), coluzzii-nohomo1 (68)   | Predicted           |
-| ag1000g-2Rd  | coluzzii (69)                          | Predicted           |
+| ag1000g-2Rd  | coluzzii (69), coluzzii-nohomo1 (68)   | Predicted           |
 | ag1000g-2Ru  | coluzzii (69)                          | Predicted           |
 | dgrp2-In2Lt  | DGRPv2 (198)                           | Yes                 |
 | dgrp2-In2Rns | DGRPv2 (198)                           | Yes                 |
@@ -57,6 +57,7 @@ Genotype labels are provided under the `inversion_genotypes` directory, and inve
 
 | Inversion ID | Groups (Samples)                       |
 | ------------ | -------------------------------------- |
+| ag1000g-2Ru  | gambiae (81)                           |
 | ag1000g-3L   | gambiae (81), coluzzii (69)            |
 | pet05.01     | niveus (86)                            |
 | pet11.01     | niveus (86)                            |
