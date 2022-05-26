@@ -10,6 +10,7 @@ Genotype labels are provided under the `inversion_genotypes` directory, and inve
 | ------------ | -------------------------------------- |
 | ag1000g-2La  | 1000 Anopheles genomes                 |
 | ag1000g-2Rb  | 1000 Anopheles genomes                 |
+| ag1000g-2Rbc | 1000 Anopheles genomes                 |
 | ag1000g-2Rc  | 1000 Anopheles genomes                 |
 | ag1000g-2Rd  | 1000 Anopheles genomes                 |
 | ag1000g-2Ru  | 1000 Anopheles genomes                 |
@@ -35,6 +36,7 @@ Genotype labels are provided under the `inversion_genotypes` directory, and inve
 | ------------ | -------------------------------------- | ------------------- |
 | ag1000g-2La  | gambiae (81)                           | Yes                 |
 | ag1000g-2Rb  | gambiae (81), gambiae-nohomostd (79), coluzzii (69) | Yes    |
+| ag1000g-2Rbc | coluzzii (69)                          | Yes                 |
 | ag1000g-2Rc  | coluzzii (69), coluzzii-nohomo1 (68)   | Predicted           |
 | ag1000g-2Rd  | coluzzii (69), coluzzii-nohomo1 (68)   | Predicted           |
 | ag1000g-2Ru  | coluzzii (69)                          | Predicted           |
@@ -57,10 +59,14 @@ Genotype labels are provided under the `inversion_genotypes` directory, and inve
 
 | Inversion ID | Groups (Samples)                       |
 | ------------ | -------------------------------------- |
+| ag1000g-2Rc  | gambiae (81)                           |
+| ag1000g-2Rd  | gambiae (81)                           |
 | ag1000g-2Ru  | gambiae (81)                           |
 | ag1000g-3L   | gambiae (81), coluzzii (69)            |
-| pet05.01     | niveus (86)                            |
+| pet05.01     | fallax (230), niveus (86)              |
+| pet09.01     | niveus (86)                            |
 | pet11.01     | niveus (86)                            |
+| pet17.01     | niveus (86)                            |
 | pet17.02     | niveus (86), fallax (230)              |
 | prunus06     | kansuensis (37)                        |
 | cyan03       | corsica (343)                          |
@@ -68,12 +74,12 @@ Genotype labels are provided under the `inversion_genotypes` directory, and inve
 ### Complicated
 | Inversion ID | Groups (Samples)                       | Comments
 | ------------ | -------------------------------------- | ---------------------------- |
-| ag1000g-2Rc  | gambiae (81)                           | There are associated SNPs in the 2Rc region but not a clear three-stripe pattern. Either a small inversion or something else. |
+| ag1000g-2Rc  | gambiae (81)                           | There are associated SNPs in the 2Rc region but not a clear three-stripe pattern. Probably not an inversion. |
 | ag1000g-2Rd  | coluzzii (69)                          | We get much better results if we do the PCA on the part of 2Rd that does not include 2Ru. Use 2Rdtail for PCA, 2Rd for actual boundaries. |
-| ag1000g-2Rd  | gambiae (81)                           | There are associated SNPs in the 2Rd region but not a clear three-stripe pattern. Either a small inversion or something else. |
+| ag1000g-2Rd  | gambiae (81)                           | There are associated SNPs near the right side of the 2Rd region but not a clear three-stripe pattern. Probably not an inversion. |
 | pet05.01     | fallax (230)                           | Todesco, et al. (2020) provides genotype labels, but we do not see evidence of associated SNPs in the inversion region. |
-| pet09.01     | niveus (86)                            | Todesco, et al. (2020) genotype labels suggest that one sample is heterozygous, but we do not see evidence of associated SNPs in the inversion region. |
-| pet17.01     | niveus (86)                            | Todesco, et al. (2020) genotype labels do not suggest any inversions, but we there are some stripe patterns in the PCA and associated SNPs in the region. |
+| pet09.01     | niveus (86)                            | Todesco, et al. (2020) genotype labels suggest that one sample is heterozygous, but we do not see evidence of associated SNPs in the inversion region. Frequency might be too low to be detectable. |
+| pet17.01     | niveus (86)                            | Todesco, et al. (2020) genotype labels do not suggest any inversions, but there could be a three-stripe patterns in the PCA and associated SNPs in the region. Frequency might be too low to be detectable. |
 | pet17.03, pet17.04 |  | The pet17.03 region includes pet17.04.  Petiolaris have the associated SNPs only in the pet17.04 region, while fallax and niveus have associated SNPs in the larger pet17.03 region. |
 
 
