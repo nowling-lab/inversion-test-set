@@ -1,0 +1,156 @@
+#!/usr/bin/env python
+
+import argparse
+from collections import defaultdict
+import gzip
+
+import numpy as np
+
+def read_variants(flname):
+    with gzip.open(flname, "rt") as fl:
+        for ln in fl:
+            if ln.startswith("#CHROM"):
+                sample_names = ln.strip().split()[9:]
+                break
+
+        positions = []
+        variants = []
+
+        chromosomes = set()
+
+        for ln in fl:
+            cols = ln.split()
+            chrom = cols[0]
+            pos = int(cols[1])
+
+            chromosomes.add(chrom)
+
+            if len(chromosomes) > 1:
+                raise Exception("Cannot process VCF files with more than one chromosome. Found: " + repr(chromosomes))
+
+            site_variants = np.zeros(len(sample_names))
+            for idx, entry in enumerate(cols[9:]):
+                gt = entry.split(":")[0]
+                if gt == "0/0":
+                    site_variants[idx] = 0
+                elif gt == "0/1":
+                    site_variants[idx] = 1
+                elif gt == "1/1":
+                    site_variants[idx] = 2
+                else:
+                    site_variants[idx] = -1
+
+            positions.append(pos)
+
+            variants.append(site_variants)
+
+        print(chromosomes)
+
+        return np.array(variants).T, positions, sample_names, list(chromosomes)[0]
+
+def is_overlapping(interval1, interval2):
+    if interval1[-1] < interval2[0]:
+        return False
+    elif interval2[-1] < interval1[0]:
+        return False
+
+    return True
+
+def merge_intervals(interval1, interval2):
+    start = min(interval1[0], interval2[0])
+    end = max(interval1[-1], interval2[-1])
+
+    return (start, end)
+
+def in_intervals(pos, intervals):
+    for interval in intervals:
+        if interval[0] <= pos <= interval[-1]:
+            return True
+
+    return False
+    
+def read_bed_fls(flnames):
+    intervals = defaultdict(list)
+    for flname in flnames:
+        with open(flname) as fl:
+            # skip header
+            next(fl)
+            for ln in fl:
+                cols = ln.split()
+                chrom = cols[0]
+                interval = (int(cols[1]), int(cols[2]))
+                intervals[chrom].append(interval)
+
+    all_merged = dict()
+    for chrom, chrom_intervals in intervals.items():
+        chrom_intervals.sort()
+
+        merged_intervals = [chrom_intervals[0]]
+        for interval2 in chrom_intervals[1:]:
+            if is_overlapping(merged_intervals[-1], interval2):
+                merged_intervals[-1] = merge_intervals(merged_intervals[-1],
+                                                       interval2)
+            else:
+                merged_intervals.append(interval2)
+
+        all_merged[chrom] = merged_intervals
+
+    print(intervals)
+    print(all_merged)
+            
+    return all_merged
+
+def parse_args():
+    args = argparse.ArgumentParser()
+
+    args.add_argument("--vcf-fl",
+                      type=str,
+                      required=True)
+
+    args.add_argument("--bed-fls",
+                      type=str,
+                      required=True,
+                      nargs="+")
+
+    args.add_argument("--npz-fl",
+                      type=str,
+                      required=True)
+
+    return args.parse_args()
+
+if __name__ == "__main__":
+    args = parse_args()
+
+    chrom_merged_intervals = read_bed_fls(args.bed_fls)
+
+    allele_counts, positions, sample_names, chrom = read_variants(args.vcf_fl)
+
+    print("Variants:", len(positions))
+    print("Samples:", len(sample_names))
+    print("Matrix shape:", allele_counts.shape)
+
+    if chrom not in chrom_merged_intervals:
+        raise Exception("Could not find any intervals for chromosome " + chrom)
+
+    merged_intervals = chrom_merged_intervals[chrom]
+
+    mask = np.zeros(allele_counts.shape[1])
+    for idx, pos in enumerate(positions):
+        if in_intervals(pos, merged_intervals):
+            mask[idx] = 1.0
+
+    print(len(positions), sum(mask))
+
+    np.savez(args.npz_fl,
+             allele_counts = allele_counts,
+             positions = np.array(positions),
+             mask = mask)
+
+    
+
+    
+
+
+
+    
+                      

@@ -60,6 +60,18 @@ rule generate_inversion_vcf_window:
         1
     shell:
         "vcftools --gzvcf {input} --chr {params.chrom} {params.keep} {params.sites} {params.exclude} {params.maf} --recode --stdout | gzip -c > {output}"
+
+rule generate_inversion_npz:
+    input:
+        "data/output_files/{inversion}_full.vcf.gz"
+    params:
+        bed_files=lambda w: " ".join(inversions[w.inversion]["inversions"].values())        
+    output:
+        "data/output_files/{inversion}_full.npz"
+    threads:
+        1
+    shell:
+        "./scripts/vcf_to_npz --vcf-fl {input} --bed-fls {params.bed_files} --npz-fl {output}"
         
 # define data sets here so we can create rules that depend
 # on individual data sets and the entire set
@@ -68,6 +80,9 @@ full_output_files = []
 window_output_files = []
 for dataset, params in inversions.items():
     flname = "data/output_files/{}_full.vcf.gz".format(dataset)
+    all_output_files.append(flname)
+
+    flname = "data/output_files/{}_full.npz".format(dataset)
     all_output_files.append(flname)
 
     # TODO generate windowed VCFs for each inversion
