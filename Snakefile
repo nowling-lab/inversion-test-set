@@ -34,13 +34,13 @@ rule filter_dgrp2_vcf:
         
 rule generate_inversion_vcf_full:
     input:
-        lambda w: inversions[w.inversion]["input"]
+        lambda w: inversions[w.dataset]["input"]
     params:
-        chrom=lambda w: inversions[w.inversion]["chrom"],
-        keep=lambda w: "" if "sample_ids" not in inversions[w.inversion] else "--keep {}".format(inversions[w.inversion]["sample_ids"]),
-        exclude=lambda w: "" if "exclude" not in inversions[w.inversion] else " ".join("--remove-indv {}".format(indv) for indv in inversions[w.inversion]["exclude"])
+        chrom=lambda w: inversions[w.dataset]["chrom"],
+        keep=lambda w: "" if "sample_ids" not in inversions[w.dataset] else "--keep {}".format(inversions[w.dataset]["sample_ids"]),
+        exclude=lambda w: "" if "exclude" not in inversions[w.dataset] else " ".join("--remove-indv {}".format(indv) for indv in inversions[w.dataset]["exclude"])
     output:
-        "data/output_files/{inversion}_full.vcf.gz"
+        "data/output_files/{dataset}_full.vcf.gz"
     threads:
         1
     shell:
@@ -63,16 +63,17 @@ rule generate_inversion_vcf_window:
         
 # define data sets here so we can create rules that depend
 # on individual data sets and the entire set
-output_files = []
-for name, params in inversions.items():
-    flname = "data/output_files/{}_full.vcf.gz".format(name)
-    output_files.append(flname)
+all_output_files = []
+full_output_files = []
+window_output_files = []
+for dataset, params in inversions.items():
+    flname = "data/output_files/{}_full.vcf.gz".format(dataset)
+    all_output_files.append(flname)
 
-    if "window" in params:
-        flname = "data/output_files/{}_window.vcf.gz".format(name)
-        output_files.append(flname)
+    # TODO generate windowed VCFs for each inversion
 
 output_files.sort()
+print(output_files)
 
 rule prepare_all:
     input:

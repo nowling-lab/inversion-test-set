@@ -1,235 +1,106 @@
-ag1000g-2La_gambiae:
+ag1000g_2L_gambiae:
   input: input_files/ag1000g.phase1.ar3.pass.biallelic.2L.vcf.gz
   chrom: 2L
   sample_ids: sample_lists/ag1000g_bfs_ids.txt
-ag1000g-2Rb_coluzzii:
+  inversions:
+    2La: inversion_boundaries/ag1000g-2La.bed
+ag1000g_2R_coluzzii:
   input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
   chrom: 2R
   sample_ids: sample_lists/ag1000g_bfm_ids.txt
-  window: inversion_boundaries/ag1000g-2Rb.bed
-ag1000g-2Rb_gambiae:
+  inversions:
+    2Rb: inversion_boundaries/ag1000g-2Rb.bed
+    2Rbc: inversion_boundaries/ag1000g-2Rbc.bed
+    2Rc: inversion_boundaries/ag1000g-2Rc.bed
+    2Rd: inversion_boundaries/ag1000g-2Rd.bed
+    2Rd-tail: inversion_boundaries/ag1000g-2Rdtail.bed
+    2Ru: inversion_boundaries/ag1000g-2Ru.bed
+ag1000g_2R_gambiae:
   input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
   chrom: 2R
   sample_ids: sample_lists/ag1000g_bfs_ids.txt
-  window: inversion_boundaries/ag1000g-2Rb.bed
-ag1000g-2Rb_gambiae-nohomostd:
-  input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
-  chrom: 2R
-  sample_ids: sample_lists/ag1000g_bfs_2Rb_nohomostd_ids.txt
-  window: inversion_boundaries/ag1000g-2Rb.bed
-ag1000g-2Rbc_coluzzii:
-  input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
-  chrom: 2R
-  sample_ids: sample_lists/ag1000g_bfm_ids.txt
-  window: inversion_boundaries/ag1000g-2Rbc.bed
-ag1000g-2Rc_coluzzii:
-  input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
-  chrom: 2R
-  sample_ids: sample_lists/ag1000g_bfm_ids.txt
-  window: inversion_boundaries/ag1000g-2Rc.bed
-ag1000g-2Rc_coluzzii-nohomo1:
-  input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
-  chrom: 2R
-  sample_ids: sample_lists/ag1000g_bfm_2Rb_nohomo1_ids.txt
-  window: inversion_boundaries/ag1000g-2Rc.bed
-ag1000g-2Rc_gambiae:
-  input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
-  chrom: 2R
-  sample_ids: sample_lists/ag1000g_bfs_ids.txt
-  window: inversion_boundaries/ag1000g-2Rc.bed
-ag1000g-2Rd_coluzzii:
-  input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
-  chrom: 2R
-  sample_ids: sample_lists/ag1000g_bfm_ids.txt
-  window: inversion_boundaries/ag1000g-2Rd.bed
-ag1000g-2Rd_coluzzii-nohomo1:
-  input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
-  chrom: 2R
-  sample_ids: sample_lists/ag1000g_bfm_2Rd_nohomo1_ids.txt
-  window: inversion_boundaries/ag1000g-2Rd.bed
-ag1000g-2Rd_gambiae:
-  input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
-  chrom: 2R
-  sample_ids: sample_lists/ag1000g_bfs_ids.txt
-  window: inversion_boundaries/ag1000g-2Rd.bed
-ag1000g-2Rdtail_coluzzii:
-  input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
-  chrom: 2R
-  sample_ids: sample_lists/ag1000g_bfm_ids.txt
-  window: inversion_boundaries/ag1000g-2Rdtail.bed
-ag1000g-2Rdtail_gambiae:
-  input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
-  chrom: 2R
-  sample_ids: sample_lists/ag1000g_bfs_ids.txt
-  window: inversion_boundaries/ag1000g-2Rdtail.bed
-ag1000g-2Ru_coluzzii:
-  input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
-  chrom: 2R
-  sample_ids: sample_lists/ag1000g_bfm_ids.txt
-  window: inversion_boundaries/ag1000g-2Ru.bed
-ag1000g-2Ru_gambiae:
-  input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
-  chrom: 2R
-  sample_ids: sample_lists/ag1000g_bfs_ids.txt
-  window: inversion_boundaries/ag1000g-2Ru.bed
-ag1000g-3L_coluzzii:
-  input: input_files/ag1000g.phase1.ar3.pass.biallelic.3L.vcf.gz
-  chrom: 3L
-  sample_ids: sample_lists/ag1000g_bfm_ids.txt
-ag1000g-3L_gambiae:
-  input: input_files/ag1000g.phase1.ar3.pass.biallelic.3L.vcf.gz
-  chrom: 3L
-  sample_ids: sample_lists/ag1000g_bfs_ids.txt
-dgrp2-In2Lt_all:
+  inversions:
+    2Rb: inversion_boundaries/ag1000g-2Rb.bed
+dgrp2_2L_all:
   input: data/dgrp2/dgrp2_2L.biallelic.vcf.gz
   chrom: 2L
-  window: inversion_boundaries/dgrp2-In2Lt.bed
-dgrp2-In2Rns_all:
+  inversions:
+    In2Lt: inversion_boundaries/dgrp2-In2Lt.bed
+dgrp2_2R_all:
   input: data/dgrp2/dgrp2_2R.biallelic.vcf.gz
   chrom: 2R
-  window: inversion_boundaries/dgrp2-In2Rns.bed
-dgrp2-In3Rp_all:
+  inversions:
+    In2Rns: inversion_boundaries/dgrp2-In2Rns.bed
+dgrp2_3R_all:
   input: data/dgrp2/dgrp2_3R.biallelic.vcf.gz
   chrom: 3R
-  window: inversion_boundaries/dgrp2-In3Rp.bed
-dgrp2-In3Rk_all:
-  input: data/dgrp2/dgrp2_3R.biallelic.vcf.gz
-  chrom: 3R
-  window: inversion_boundaries/dgrp2-In3Rk.bed
-dgrp2-In3Rmo_all:
-  input: data/dgrp2/dgrp2_3R.biallelic.vcf.gz
-  chrom: 3R
-  window: inversion_boundaries/dgrp2-In3Rmo.bed
-pet05.01_petiolaris:
+  inversions:
+    In3Rp: inversion_boundaries/dgrp2-In3Rp.bed
+    In3Rk: inversion_boundaries/dgrp2-In3Rk.bed
+    In3Rmo: inversion_boundaries/dgrp2-In3Rmo.bed
+sunflowers_pet05_petiolaris:
   input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
   chrom: Ha412HOChr05
   sample_ids: sample_lists/H_petiolaris_petiolaris_ids.txt
-  window: inversion_boundaries/pet05.01.bed
-pet05.01_fallax:
-  input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
-  chrom: Ha412HOChr05
-  sample_ids: sample_lists/H_petiolaris_fallax_ids.txt
-  window: inversion_boundaries/pet05.01.bed
-pet05.01_niveus:
-  input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
-  chrom: Ha412HOChr05
-  sample_ids: sample_lists/H_niveus_canescens_ids.txt
-  window: inversion_boundaries/pet05.01.bed
-pet09.01_petiolaris:
+  inversions:
+    pet05.01: inversion_boundaries/pet05.01.bed
+sunflowers_pet09_petiolaris:
   input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
   chrom: Ha412HOChr09
   sample_ids: sample_lists/H_petiolaris_petiolaris_ids.txt
-  window: inversion_boundaries/pet09.01.bed
-pet09.01_fallax:
+  inversions:
+    pet09.01: inversion_boundaries/pet09.01.bed
+sunflowers_pet09_fallax:
   input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
   chrom: Ha412HOChr09
   sample_ids: sample_lists/H_petiolaris_fallax_ids.txt
-  window: inversion_boundaries/pet09.01.bed
-pet09.01_niveus:
-  input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
-  chrom: Ha412HOChr09
-  sample_ids: sample_lists/H_niveus_canescens_ids.txt
-  window: inversion_boundaries/pet09.01.bed
-pet11.01_petiolaris:
+  inversions:
+    pet09.01: inversion_boundaries/pet09.01.bed
+sunflowers_pet11_petiolaris:
   input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
   chrom: Ha412HOChr11
   sample_ids: sample_lists/H_petiolaris_petiolaris_ids.txt
-  window: inversion_boundaries/pet11.01.bed
-pet11.01_fallax:
+  inversions:
+    pet11.01: inversion_boundaries/pet11.01.bed
+sunflowers_pet11_fallax:
   input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
   chrom: Ha412HOChr11
   sample_ids: sample_lists/H_petiolaris_fallax_ids.txt
-  window: inversion_boundaries/pet11.01.bed
+  inversions:
+    pet11.01: inversion_boundaries/pet11.01.bed
   exclude:
     - PET0628
-pet11.01_niveus:
-  input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
-  chrom: Ha412HOChr11
-  sample_ids: sample_lists/H_niveus_canescens_ids.txt
-  window: inversion_boundaries/pet11.01.bed
-pet17.01_petiolaris:
+sunflowers_pet17_petiolaris:
   input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
   chrom: Ha412HOChr17
   sample_ids: sample_lists/H_petiolaris_petiolaris_ids.txt
-  window: inversion_boundaries/pet17.01.bed
-pet17.01_fallax:
+  inversions:
+    pet17.01: inversion_boundaries/pet17.01.bed
+    pet17.02: inversion_boundaries/pet17.02.bed
+    pet17.04: inversion_boundaries/pet17.04.bed
+sunflowers_pet17_fallax:
   input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
   chrom: Ha412HOChr17
   sample_ids: sample_lists/H_petiolaris_fallax_ids.txt
-  window: inversion_boundaries/pet17.01.bed
-pet17.01_niveus:
+  inversions:
+    pet17.01: inversion_boundaries/pet17.01.bed
+    pet17.03: inversion_boundaries/pet17.03.bed
+sunflowers_pet17_niveus:
   input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
   chrom: Ha412HOChr17
   sample_ids: sample_lists/H_niveus_canescens_ids.txt
-  window: inversion_boundaries/pet17.01.bed
-pet17.02_petiolaris:
-  input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
-  chrom: Ha412HOChr17
-  sample_ids: sample_lists/H_petiolaris_petiolaris_ids.txt
-  window: inversion_boundaries/pet17.02.bed
-pet17.02_fallax:
-  input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
-  chrom: Ha412HOChr17
-  sample_ids: sample_lists/H_petiolaris_fallax_ids.txt
-  window: inversion_boundaries/pet17.02.bed
-pet17.02_niveus:
-  input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
-  chrom: Ha412HOChr17
-  sample_ids: sample_lists/H_niveus_canescens_ids.txt
-  window: inversion_boundaries/pet17.02.bed
-pet17.03_petiolaris:
-  input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
-  chrom: Ha412HOChr17
-  sample_ids: sample_lists/H_petiolaris_petiolaris_ids.txt
-  window: inversion_boundaries/pet17.03.bed
-pet17.03_fallax:
-  input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
-  chrom: Ha412HOChr17
-  sample_ids: sample_lists/H_petiolaris_fallax_ids.txt
-  window: inversion_boundaries/pet17.03.bed
-pet17.03_niveus:
-  input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
-  chrom: Ha412HOChr17
-  sample_ids: sample_lists/H_niveus_canescens_ids.txt
-  window: inversion_boundaries/pet17.03.bed
-pet17.04_petiolaris:
-  input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
-  chrom: Ha412HOChr17
-  sample_ids: sample_lists/H_petiolaris_petiolaris_ids.txt
-  window: inversion_boundaries/pet17.04.bed
-pet17.04_fallax:
-  input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
-  chrom: Ha412HOChr17
-  sample_ids: sample_lists/H_petiolaris_fallax_ids.txt
-  window: inversion_boundaries/pet17.04.bed
-pet17.04_niveus:
-  input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
-  chrom: Ha412HOChr17
-  sample_ids: sample_lists/H_niveus_canescens_ids.txt
-  window: inversion_boundaries/pet17.04.bed
-cyan03_corsica:
-  input: input_files/BLUE2020VCF.vcf.gz
-  chrom: chromo.03
-  sample_ids: sample_lists/cyanistes_corsica_ids.txt
-  window: inversion_boundaries/cyan03.bed
-cyan03_mainland:
+  inversions:
+    pet17.03: inversion_boundaries/pet17.03.bed
+cyan_chrom03_mainland:
   input: input_files/BLUE2020VCF.vcf.gz
   chrom: chromo.03
   sample_ids: sample_lists/cyanistes_mainland_ids.txt
-  window: inversion_boundaries/cyan03.bed
-cyan03_mainland-nohomo2:
-  input: input_files/BLUE2020VCF.vcf.gz
-  chrom: chromo.03
-  sample_ids: sample_lists/cyanistes_mainland-nohomo2_ids.txt
-  window: inversion_boundaries/cyan03.bed
-prunus06_kansuensis:
-  input: input_files/SNP.vcf.gz
-  chrom: Pp06
-  sample_ids: sample_lists/prunus_kansuensis_ids.txt
-  window: inversion_boundaries/prunus06.bed
-prunus06_persica:
+  inversions:
+    chrom03.01: inversion_boundaries/cyan03.bed
+prunus06_pp06_persica:
   input: input_files/SNP.vcf.gz
   chrom: Pp06
   sample_ids: sample_lists/prunus_persica_ids.txt
-  window: inversion_boundaries/prunus06.bed
+  inversions:
+    pp06.01: inversion_boundaries/prunus06.bed
 
