@@ -7,6 +7,7 @@ We composed a benchmark data set for evaluating SNP-based inversion detection me
 Genotype labels are provided under the `inversion_genotypes` directory, and inversion boundaries are provided under the `inversion_boundaries` directory.
 
 | Data Set | Citation | Populations (samples) |
+| -------- | -------- | --------------------- |
 | 1000 Anopheles genomes | Miles, et al. (2017) | gambiae (81), coluzzii (69) |
 | DGRPv2 | Mackay, et al. (2012); Huang, et al. (2014) | all (198) |
 | UBC Sunflower Genome Project | Todesco, et al. (2020) | petiolaris (158), fallax (230), niveus (86) |
