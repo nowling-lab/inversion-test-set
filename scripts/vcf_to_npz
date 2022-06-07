@@ -76,10 +76,11 @@ def read_bed_fls(flnames):
             # skip header
             next(fl)
             for ln in fl:
-                cols = ln.split()
-                chrom = cols[0]
-                interval = (int(cols[1]), int(cols[2]))
-                intervals[chrom].append(interval)
+                if ln.strip() != "":
+                    cols = ln.split()
+                    chrom = cols[0]
+                    interval = (int(cols[1]), int(cols[2]))
+                    intervals[chrom].append(interval)
 
     all_merged = dict()
     for chrom, chrom_intervals in intervals.items():
