@@ -87,9 +87,9 @@ for dataset, params in inversions.items():
 
     # TODO generate windowed VCFs for each inversion
 
-output_files.sort()
-print(output_files)
+all_output_files.sort()
+print(all_output_files)
 
 rule prepare_all:
     input:
-        output_files
+        all_output_files
