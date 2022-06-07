@@ -36,13 +36,15 @@ rule generate_inversion_vcf_full:
     params:
         chrom=lambda w: inversions[w.dataset]["chrom"],
         keep=lambda w: "" if "sample_ids" not in inversions[w.dataset] else "--keep {}".format(inversions[w.dataset]["sample_ids"]),
-        exclude=lambda w: "" if "exclude" not in inversions[w.dataset] else " ".join("--remove-indv {}".format(indv) for indv in inversions[w.dataset]["exclude"])
+        exclude=lambda w: "" if "exclude" not in inversions[w.dataset] else " ".join("--remove-indv {}".format(indv) for indv in inversions[w.dataset]["exclude"]),
+        # for some reason, the maf flag causes a "munmap_chunk(): invalid pointer" in VCFTools just for this data set
+        maf=lambda w: "" if w.dataset.startswith("prunus") else "--maf 0.05"
     output:
         "data/output_files/{dataset}_full.vcf.gz"
     threads:
         1
     shell:
-        "vcftools --gzvcf {input} --chr {params.chrom} {params.keep} {params.exclude} --maf 0.05 --recode --stdout | gzip -c > {output}"
+        "vcftools --gzvcf {input} --chr {params.chrom} {params.keep} {params.exclude} {params.maf} --recode --stdout | gzip -c > {output}"
 
 rule generate_inversion_vcf_window:
     input:
@@ -53,7 +55,7 @@ rule generate_inversion_vcf_window:
         sites=lambda w: "--bed {}".format(inversions[w.inversion]["window"]),
         exclude=lambda w: "" if "exclude" not in inversions[w.inversion] else " ".join("--remove-indv {}".format(indv) for indv in inversions[w.inversion]["exclude"]),
         # for some reason, the maf flag causes a "munmap_chunk(): invalid pointer" in VCFTools just for this data set
-        maf=lambda w: "" if not w.dataset.startswith("prunus") else "--maf 0.05"
+        maf=lambda w: "" if w.dataset.startswith("prunus") else "--maf 0.05"
     output:
         "data/output_files/{inversion}_window.vcf.gz"
     threads:
