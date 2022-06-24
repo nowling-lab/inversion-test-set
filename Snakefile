@@ -19,16 +19,21 @@ with open("inversions.yaml", "r") as fl:
 
 print(inversions)
 
+# Parameters
+MAF=0.01
+
 ## process Drosophila Genetics Reference Panel v2 VCFs
 rule filter_dgrp2_vcf:
     input:
         vcf="input_files/dgrp2.vcf"
+    params:
+        maf=MAF
     output:
         filtered_vcf="data/dgrp2/dgrp2_{chrom}.biallelic.vcf.gz"
     threads:
         1
     shell:
-        "vcftools --vcf {input.vcf} --min-alleles 2 --max-alleles 2 --remove-indels --maf 0.01 --recode --stdout --remove-indv line_348 --remove-indv line_350 --remove-indv line_358 --remove-indv line_385 --remove-indv line_392 --remove-indv line_395 --remove-indv line_399 --chr {wildcards.chrom} | gzip -c > {output.filtered_vcf}"
+        "vcftools --vcf {input.vcf} --min-alleles 2 --max-alleles 2 --remove-indels --maf {params.maf} --recode --stdout --remove-indv line_348 --remove-indv line_350 --remove-indv line_358 --remove-indv line_385 --remove-indv line_392 --remove-indv line_395 --remove-indv line_399 --chr {wildcards.chrom} | gzip -c > {output.filtered_vcf}"
         
 rule generate_inversion_vcf_full:
     input:
@@ -38,7 +43,7 @@ rule generate_inversion_vcf_full:
         keep=lambda w: "" if "sample_ids" not in inversions[w.dataset] else "--keep {}".format(inversions[w.dataset]["sample_ids"]),
         exclude=lambda w: "" if "exclude" not in inversions[w.dataset] else " ".join("--remove-indv {}".format(indv) for indv in inversions[w.dataset]["exclude"]),
         # for some reason, the maf flag causes a "munmap_chunk(): invalid pointer" in VCFTools just for this data set
-        maf=lambda w: "" if w.dataset.startswith("prunus") else "--maf 0.05"
+        maf=lambda w: "" if w.dataset.startswith("prunus") else "--maf {}".format(MAF)
     output:
         "data/output_files/{dataset}_full.vcf.gz"
     threads:
@@ -55,7 +60,7 @@ rule generate_inversion_vcf_window:
         sites=lambda w: "--bed {}".format(inversions[w.inversion]["window"]),
         exclude=lambda w: "" if "exclude" not in inversions[w.inversion] else " ".join("--remove-indv {}".format(indv) for indv in inversions[w.inversion]["exclude"]),
         # for some reason, the maf flag causes a "munmap_chunk(): invalid pointer" in VCFTools just for this data set
-        maf=lambda w: "" if w.dataset.startswith("prunus") else "--maf 0.05"
+        maf=lambda w: "" if w.dataset.startswith("prunus") else "--maf {}".format(MAF)
     output:
         "data/output_files/{inversion}_window.vcf.gz"
     threads:
