@@ -45,7 +45,7 @@ rule generate_inversion_vcf_full:
         # for some reason, the maf flag causes a "munmap_chunk(): invalid pointer" in VCFTools just for this data set
         maf=lambda w: "" if w.dataset.startswith("prunus") else "--maf {}".format(MAF)
     output:
-        "data/output_files/{dataset}_full.vcf.gz"
+        "output_files/{dataset}_full.vcf.gz"
     threads:
         1
     shell:
@@ -53,7 +53,7 @@ rule generate_inversion_vcf_full:
 
 rule generate_inversion_vcf_window:
     input:
-        "data/output_files/{inversion}_full.vcf.gz"
+        "output_files/{inversion}_full.vcf.gz"
     params:
         chrom=lambda w: inversions[w.inversion]["chrom"],
         keep=lambda w: "" if "sample_ids" not in inversions[w.inversion] else "--keep {}".format(inversions[w.inversion]["sample_ids"]),
@@ -62,7 +62,7 @@ rule generate_inversion_vcf_window:
         # for some reason, the maf flag causes a "munmap_chunk(): invalid pointer" in VCFTools just for this data set
         maf=lambda w: "" if w.dataset.startswith("prunus") else "--maf {}".format(MAF)
     output:
-        "data/output_files/{inversion}_window.vcf.gz"
+        "output_files/{inversion}_window.vcf.gz"
     threads:
         1
     shell:
@@ -70,11 +70,11 @@ rule generate_inversion_vcf_window:
 
 rule generate_inversion_npz:
     input:
-        "data/output_files/{inversion}_full.vcf.gz"
+        "output_files/{inversion}_full.vcf.gz"
     params:
         bed_files=lambda w: " ".join(inversions[w.inversion]["inversions"].values())        
     output:
-        "data/output_files/{inversion}_full.npz"
+        "output_files/{inversion}_full.npz"
     threads:
         1
     shell:
@@ -86,10 +86,10 @@ all_output_files = []
 full_output_files = []
 window_output_files = []
 for dataset, params in inversions.items():
-    flname = "data/output_files/{}_full.vcf.gz".format(dataset)
+    flname = "output_files/{}_full.vcf.gz".format(dataset)
     all_output_files.append(flname)
 
-    flname = "data/output_files/{}_full.npz".format(dataset)
+    flname = "output_files/{}_full.npz".format(dataset)
     all_output_files.append(flname)
 
     # TODO generate windowed VCFs for each inversion
