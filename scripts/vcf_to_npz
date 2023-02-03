@@ -96,9 +96,6 @@ def read_bed_fls(flnames):
 
         all_merged[chrom] = merged_intervals
 
-    print(intervals)
-    print(all_merged)
-            
     return all_merged
 
 def parse_args():
@@ -110,8 +107,7 @@ def parse_args():
 
     args.add_argument("--bed-fls",
                       type=str,
-                      required=True,
-                      nargs="+")
+                      nargs="*")
 
     args.add_argument("--npz-fl",
                       type=str,
@@ -122,30 +118,37 @@ def parse_args():
 if __name__ == "__main__":
     args = parse_args()
 
-    chrom_merged_intervals = read_bed_fls(args.bed_fls)
-
     allele_counts, positions, sample_names, chrom = read_variants(args.vcf_fl)
 
     print("Variants:", len(positions))
     print("Samples:", len(sample_names))
     print("Matrix shape:", allele_counts.shape)
 
-    if chrom not in chrom_merged_intervals:
-        raise Exception("Could not find any intervals for chromosome " + chrom)
-
-    merged_intervals = chrom_merged_intervals[chrom]
-
     mask = np.zeros(allele_counts.shape[1])
-    for idx, pos in enumerate(positions):
-        if in_intervals(pos, merged_intervals):
-            mask[idx] = 1.0
+    
+    if args.bed_fls:
+        chrom_merged_intervals = read_bed_fls(args.bed_fls)
+        if chrom not in chrom_merged_intervals:
+            raise Exception("Could not find any intervals for chromosome " + chrom)
+
+        merged_intervals = chrom_merged_intervals[chrom]
+
+        print(merged_intervals)
+
+        for idx, pos in enumerate(positions):
+            if in_intervals(pos, merged_intervals):
+                mask[idx] = 1.0
+
+    print("positive", np.where(mask == 1.0)[0])
+    print("negative", np.where(mask == 0.0)[0])
 
     print(len(positions), sum(mask))
 
-    np.savez(args.npz_fl,
-             allele_counts = allele_counts,
-             positions = np.array(positions),
-             mask = mask)
+    np.savez_compressed(args.npz_fl,
+                        allele_counts = allele_counts,
+                        positions = np.array(positions),
+                        mask = mask,
+                        sample_names = tuple(sample_names))
 
     
 
