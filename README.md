@@ -10,7 +10,7 @@ Genotype labels are provided under the `inversion_genotypes` directory, and inve
 | -------- | -------- | --------------------- |
 | 1000 Anopheles genomes | Miles, et al. (2017) | gambiae (81), coluzzii (69) |
 | DGRPv2 | Mackay, et al. (2012); Huang, et al. (2014) | all (198) |
-| UBC Sunflower Genome Project | Todesco, et al. (2020) | petiolaris (158), fallax (230), niveus (86) |
+| UBC Sunflower Genome Project | Todesco, et al. (2020) | petiolaris (166), fallax (234), niveus (86) |
 | Peach | Guan, et al. (2021) | persica (149), kansuensis (37) |
 | Blue tit | Perrier, et al. (2020) | mainland (111), corsica (343) |
 
