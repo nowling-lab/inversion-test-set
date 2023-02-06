@@ -26,7 +26,7 @@ These positives examples were curated to select subpopulations with clear signal
 | cyan\_chrom03     | C. caeruleus (mainland)  | chrom03.01                   | Predicted           |
 | dgrp2\_2L         | D. melanogaster          | In(2L)t                      | Yes                 |
 | dgrp2\_2R         | D. melanogaster          | In(2R)ns                     | Yes                 |
-| dgrp2\_3R         | D. mleanogaster          | In(3R)p, In(3R)mo, In(3R)k   | Yes                 |
+| dgrp2\_3R         | D. melanogaster          | In(3R)p, In(3R)mo, In(3R)k   | Yes                 |
 | peach\_pp06       | P. persica               | pp06.01                      | No                  |
 | sunflowers\_pet17 | H. niveus canescens      | pet17.03                     | Predicted           |
 | sunflowers\_pet05 | H. petiolaris petiolaris | pet05.01                     | Predicted           |
