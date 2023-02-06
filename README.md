@@ -43,7 +43,7 @@ These positives examples were curated to select subpopulations with clear signal
 | ----------------- | ------------------------ |
 | ag1000g\_3L       | An. gambiae (B. Faso)    |
 | ag1000g\_3L       | An. coluzzii (B. Faso)   |
-| cyan\_chrom03     | C. caeruleus (corsica )  |
+| cyan\_chrom03     | C. caeruleus (corsica)   |
 | dgrp2\_3L         | D. melanogaster          |
 | peach\_pp06       | P. kansuensis            |
 | sunflowers\_pet05 | H. niveus canescens      |
