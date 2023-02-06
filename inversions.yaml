@@ -1,3 +1,5 @@
+# positive for inversions
+# reduced to subpopulations with strong signal
 ag1000g_2L_gambiae:
   input: input_files/ag1000g.phase1.ar3.pass.biallelic.2L.vcf.gz
   chrom: 2L
@@ -9,11 +11,8 @@ ag1000g_2R_coluzzii:
   chrom: 2R
   sample_ids: sample_lists/ag1000g_bfm_ids.txt
   inversions:
-    2Rb: inversion_boundaries/ag1000g-2Rb.bed
     2Rbc: inversion_boundaries/ag1000g-2Rbc.bed
-    2Rc: inversion_boundaries/ag1000g-2Rc.bed
     2Rd: inversion_boundaries/ag1000g-2Rd.bed
-    2Rd-tail: inversion_boundaries/ag1000g-2Rdtail.bed
     2Ru: inversion_boundaries/ag1000g-2Ru.bed
 ag1000g_2R_gambiae:
   input: input_files/ag1000g.phase1.ar3.pass.biallelic.2R.vcf.gz
@@ -21,6 +20,12 @@ ag1000g_2R_gambiae:
   sample_ids: sample_lists/ag1000g_bfs_ids.txt
   inversions:
     2Rb: inversion_boundaries/ag1000g-2Rb.bed
+cyan_chrom03_mainland:
+  input: input_files/BLUE2020VCF.vcf.gz
+  chrom: chromo.03
+  sample_ids: sample_lists/cyanistes_mainland_ids.txt
+  inversions:
+    chrom03.01: inversion_boundaries/cyan03.bed
 dgrp2_2L_all:
   input: data/dgrp2/dgrp2_2L.biallelic.vcf.gz
   chrom: 2L
@@ -38,6 +43,12 @@ dgrp2_3R_all:
     In3Rp: inversion_boundaries/dgrp2-In3Rp.bed
     In3Rk: inversion_boundaries/dgrp2-In3Rk.bed
     In3Rmo: inversion_boundaries/dgrp2-In3Rmo.bed
+prunus06_pp06_persica:
+  input: input_files/SNP.vcf.gz
+  chrom: Pp06
+  sample_ids: sample_lists/prunus_persica_ids.txt
+  inversions:
+    pp06.01: inversion_boundaries/prunus06.bed
 sunflowers_pet05_petiolaris:
   input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
   chrom: Ha412HOChr05
@@ -49,7 +60,7 @@ sunflowers_pet09_petiolaris:
   chrom: Ha412HOChr09
   sample_ids: sample_lists/H_petiolaris_petiolaris_ids.txt
   inversions:
-    pet09.01: inversion_boundaries/pet09.01.bed
+    pet09.01: inversion_boundaries/pet09.01_merged.bed
 sunflowers_pet09_fallax:
   input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
   chrom: Ha412HOChr09
@@ -91,16 +102,62 @@ sunflowers_pet17_niveus:
   sample_ids: sample_lists/H_niveus_canescens_ids.txt
   inversions:
     pet17.03: inversion_boundaries/pet17.03.bed
-cyan_chrom03_mainland:
+
+# no inversions (negatives)
+ag1000g_3L_coluzzii:
+  input: input_files/ag1000g.phase1.ar3.pass.biallelic.3L.vcf.gz
+  chrom: 3L
+  sample_ids: sample_lists/ag1000g_bfm_ids.txt
+ag1000g_3L_gambiae:
+  input: input_files/ag1000g.phase1.ar3.pass.biallelic.3L.vcf.gz
+  chrom: 3L
+  sample_ids: sample_lists/ag1000g_bfs_ids.txt
+cyan_chrom03_corsica:
   input: input_files/BLUE2020VCF.vcf.gz
   chrom: chromo.03
-  sample_ids: sample_lists/cyanistes_mainland_ids.txt
-  inversions:
-    chrom03.01: inversion_boundaries/cyan03.bed
-prunus06_pp06_persica:
-  input: input_files/SNP.vcf.gz
-  chrom: Pp06
-  sample_ids: sample_lists/prunus_persica_ids.txt
-  inversions:
-    pp06.01: inversion_boundaries/prunus06.bed
+  sample_ids: sample_lists/cyanistes_corsica_ids.txt
+dgrp2_3L_all:
+  input: data/dgrp2/dgrp2_3L.biallelic.vcf.gz
+  chrom: 3L
+  exclude:
+    - line_31
+    - line_69
+    - line_136
+    - line_426
+    - line_352
+    - line_721
+    - line_913
+sunflowers_pet05_fallax:
+  input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
+  chrom: Ha412HOChr05
+  sample_ids: sample_lists/H_petiolaris_fallax_ids.txt
+sunflowers_pet05_niveus:
+  input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
+  chrom: Ha412HOChr05
+  sample_ids: sample_lists/H_niveus_canescens_ids.txt
+sunflowers_pet09_niveus:
+  input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
+  chrom: Ha412HOChr09
+  sample_ids: sample_lists/H_niveus_canescens_ids.txt
+sunflowers_pet11_niveus:
+  input: input_files/Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz
+  chrom: Ha412HOChr11
+  sample_ids: sample_lists/H_niveus_canescens_ids.txt
 
+# Uncharacterized phenomena
+ag1000g_3R_coluzzii:
+  input: input_files/ag1000g.phase1.ar3.pass.biallelic.3R.vcf.gz
+  chrom: 3R
+  sample_ids: sample_lists/ag1000g_bfm_ids.txt
+ag1000g_3R_gambiae:
+  input: input_files/ag1000g.phase1.ar3.pass.biallelic.3R.vcf.gz
+  chrom: 3R
+  sample_ids: sample_lists/ag1000g_bfs_ids.txt
+ag1000g_X_coluzzii:
+  input: input_files/ag1000g.phase1.ar3.pass.biallelic.X.vcf.gz
+  chrom: X
+  sample_ids: sample_lists/ag1000g_bfm_ids.txt
+ag1000g_X_gambiae:
+  input: input_files/ag1000g.phase1.ar3.pass.biallelic.X.vcf.gz
+  chrom: X
+  sample_ids: sample_lists/ag1000g_bfs_ids.txt

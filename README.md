@@ -14,57 +14,51 @@ Genotype labels are provided under the `inversion_genotypes` directory, and inve
 | Peach | Guan, et al. (2021) | persica (149), kansuensis (37) |
 | Blue tit | Perrier, et al. (2020) | mainland (111), corsica (343) |
 
-| Chromosome        | Inversions (populations)                             |
-| ----------------- | -------------------------------------- |
-| ag1000g\_2L       | 2La (gambiae)                          |
-| ag1000g\_2R       | 2Rb (gambiae, coluzzii), 2Rbc (coluzzii), 2Rd (coluzzii), 2Ru (coluzzii) |
-| dgrp2\_2L         | In2Lt (all)                                 |
-| dgrp2\_2R         | In2Rns (all)                                 |
-| dgrp2\_3R         | In3Rp (all), In3Rmo (all), In3Rk (all)                                 |
-| sunflowers\_pet05 | pet05.01 (petiolaris)           |
-| sunflowers\_pet09 | pet09.01 (petiolaris, fallax)           |
-| sunflowers\_pet11 | pet11.01 (petiolaris, fallax)           |
-| sunflowers\_pet17 | pet17.01 (petiolaris, fallax), pet17.02 (petiolaris), pet17.03 (fallax, niveus), pet17.04 (petiolaris)           |
-| peach\_pp06       | pp06.01 (persica)                    |
-| cyan\_chrom03     | chrom03.01 (mainland)                 |
-
 
 ### Positives
+These positives examples were curated to select subpopulations with clear signals.
 
-| Inversion ID | Groups (Samples)                       | Genotypes Available |
-| ------------ | -------------------------------------- | ------------------- |
-| ag1000g-2La  | gambiae (81)                           | Yes                 |
-| ag1000g-2Rb  | gambiae (81), gambiae-nohomostd (79), coluzzii (69) | Yes    |
-| ag1000g-2Rbc | coluzzii (69)                          | Yes                 |
-| ag1000g-2Rc  | coluzzii (69), coluzzii-nohomo1 (68)   | Predicted           |
-| ag1000g-2Rd  | coluzzii (69), coluzzii-nohomo1 (68)   | Predicted           |
-| ag1000g-2Ru  | coluzzii (69)                          | Predicted           |
-| dgrp2-In2Lt  | DGRPv2 (198)                           | Yes                 |
-| dgrp2-In2Rns | DGRPv2 (198)                           | Yes                 |
-| dgrp2-In3Rp  | DGRPv2 (198)                           | Yes                 |
-| dgrp2-In3Rmo | DGRPv2 (198)                           | Yes                 |
-| dgrp2-In3Rk  | DGRPv2 (198)                           | Yes                 |
-| pet05.01     | petiolaris (158)                       | Yes                 |
-| pet09.01     | petiolaris (158), fallax (230)         | Yes                 |
-| pet11.01     | petiolaris (158), fallax (230)         | Yes                 |
-| pet17.01     | petiolaris (158), fallax (230)         | Yes                 |
-| pet17.02     | petiolaris (158)                       | Yes                 |
-| pet17.03     | fallax (230), niveus (86)              | Yes                 |
-| pet17.04     | petiolaris (158)                       | Yes                 |
-| prunus06     | persica (149)                          | No                  |
-| cyan03       | mainland (111), mainland-nohomo2 (109) | Predicted           |
+| Chromosome        | Population               | Inversions                   | Genotypes Available |
+| ----------------- | ------------------------ |----------------------------- | ------------------- |
+| ag1000g\_2L       | An. gambiae (B. Faso)    | 2La                          | Yes                 |
+| ag1000g\_2R       | An. gambiae (B. Faso)    | 2Rb                          | Yes                 |
+| ag1000g\_2R       | An. coluzzii (B. Faso)   | 2Rbc, 2Rd, 2Ru               | Yes                 |
+| cyan\_chrom03     | C. caeruleus (mainland)  | chrom03.01                   | Predicted           |
+| dgrp2\_2L         | D. melanogaster          | In(2L)t                      | Yes                 |
+| dgrp2\_2R         | D. melanogaster          | In(2R)ns                     | Yes                 |
+| dgrp2\_3R         | D. mleanogaster          | In(3R)p, In(3R)mo, In(3R)k   | Yes                 |
+| peach\_pp06       | P. persica               | pp06.01                      | No                  |
+| sunflowers\_pet17 | H. niveus canescens      | pet17.03                     | Predicted           |
+| sunflowers\_pet05 | H. petiolaris petiolaris | pet05.01                     | Predicted           |
+| sunflowers\_pet09 | H. petiolaris petiolaris | pet09.01                     | Predicted           |
+| sunflowers\_pet11 | H. petiolaris petiolaris | pet11.01                     | Predicted           |
+| sunflowers\_pet17 | H. petiolaris petiolaris | pet17.01, pet17.02, pet17.04 | Predicted           |
+| sunflowers\_pet09 | H. petiolaris fallax     | pet09.01                     | Predicted           |
+| sunflowers\_pet11 | H. petiolaris fallax     | pet11.01                     | Predicted           |
+| sunflowers\_pet17 | H. petiolaris fallax     | pet17.01, pet17.03           | Predicted           |
 
 
-### Notes
-| Inversion ID | Groups (Samples)                       | Comments
-| ------------ | -------------------------------------- | ---------------------------- |
-| ag1000g-2Rc  | gambiae (81)                           | There are associated SNPs in the 2Rc region but not a clear three-stripe pattern. Probably not an inversion. |
-| ag1000g-2Rd  | coluzzii (69)                          | We get much better results if we do the PCA on the part of 2Rd that does not include 2Ru. Use 2Rdtail for PCA, 2Rd for actual boundaries. |
-| ag1000g-2Rd  | gambiae (81)                           | There are associated SNPs near the right side of the 2Rd region but not a clear three-stripe pattern. Probably not an inversion. |
-| pet05.01     | fallax (230)                           | Todesco, et al. (2020) provides genotype labels, but we do not see evidence of associated SNPs in the inversion region. |
-| pet09.01     | niveus (86)                            | Todesco, et al. (2020) genotype labels suggest that one sample is heterozygous, but we do not see evidence of associated SNPs in the inversion region. Frequency might be too low to be detectable. |
-| pet17.01     | niveus (86)                            | Todesco, et al. (2020) genotype labels do not suggest any inversions, but there could be a three-stripe patterns in the PCA and associated SNPs in the region. Frequency might be too low to be detectable. |
-| pet17.03, pet17.04 |  | The pet17.03 region includes pet17.04.  Petiolaris have the associated SNPs only in the pet17.04 region, while fallax and niveus have associated SNPs in the larger pet17.03 region. |
+### Negatives
+| Chromosome        | Population               |
+| ----------------- | ------------------------ |
+| ag1000g\_3L       | An. gambiae (B. Faso)    |
+| ag1000g\_3L       | An. coluzzii (B. Faso)   |
+| cyan\_chrom03     | C. caeruleus (corsica )  |
+| dgrp2\_3L         | D. melanogaster          |
+| peach\_pp06       | P. kansuensis            |
+| sunflowers\_pet05 | H. niveus canescens      |
+| sunflowers\_pet09 | H. niveus canescens      |
+| sunflowers\_pet11 | H. niveus canescens      |
+| sunflowers\_pet05 | H. petiolaris fallax     |
+
+### Uncharacterized phenomena
+| Chromosome        | Population               |
+| ----------------- | ------------------------ |
+| ag1000g\_3L       | An. gambiae (B. Faso)    |
+| ag1000g\_3L       | An. coluzzii (B. Faso)   |
+| ag1000g\_X        | An. gambiae (B. Faso)    |
+| ag1000g\_X        | An. coluzzii (B. Faso)   |
+
 
 ## Machine Learning Problems
 
@@ -98,7 +92,7 @@ Some thoughts on the approach and associated challenges:
 You will need to download:
 
 * Drosophila: The `dgrp2.vcf` VCF file from the [Drosophila Genetics Reference Panel v2](http://dgrp2.gnets.ncsu.edu/data.html)
-* Anopheles: The biallelic 3L, 2R, and 2L VCF files from the FTP site for the 1000 Anopheles Genomes project phase 1 AR3 data release (`ftp://ngs.sanger.ac.uk/production/ag1000g/phase1/AR3/variation/main/vcf/`).  These files are named: `ag1000g.phase1.ar3.pass.biallelic.{chrom}.vcf.gz` where chrom is 3L, 2R, or 2L.
+* Anopheles: The biallelic 2L, 2R, 3L, 3R, and X VCF files from the FTP site for the 1000 Anopheles Genomes project phase 1 AR3 data release (`ftp://ngs.sanger.ac.uk/production/ag1000g/phase1/AR3/variation/main/vcf/`).  These files are named: `ag1000g.phase1.ar3.pass.biallelic.{chrom}.vcf.gz` where chrom is 3L, 2R, or 2L.
 * H. petiolaris: `Petiolaris.pet_gwas.tranche90_snps_bi_AN50_AF99.vcf.gz` from the [UBC Sunflower Genome project](https://rieseberglab.github.io/ubc-sunflower-genome/)
 * Prunus: `SNP.vcf.gz` (for Prunus) from [Figshare](https://figshare.com/articles/dataset/SNP_SV_and_scripts_for_RYP1_genome_paper/12937340/1)
 * Cyanistes: `BLUE2020VCF.vcf.gz` from [Dryad](https://datadryad.org/stash/dataset/doi:10.5061/dryad.x69p8czfg)

@@ -93,7 +93,6 @@ for dataset, params in inversions.items():
     all_output_files.append(flname)
 
 all_output_files.sort()
-print(all_output_files)
 
 rule prepare_all:
     input:
