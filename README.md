@@ -41,8 +41,9 @@ These positives examples were curated to select subpopulations with clear signal
 ### Negatives
 | Chromosome        | Population               |
 | ----------------- | ------------------------ |
-| ag1000g\_3L       | An. gambiae (B. Faso)    |
 | ag1000g\_3L       | An. coluzzii (B. Faso)   |
+| ag1000g\_3R       | An. gambiae (B. Faso)    |
+| ag1000g\_3R       | An. coluzzii (B. Faso)   |
 | cyan\_chrom03     | C. caeruleus (corsica)   |
 | dgrp2\_3L         | D. melanogaster          |
 | peach\_pp06       | P. kansuensis            |
@@ -55,7 +56,6 @@ These positives examples were curated to select subpopulations with clear signal
 | Chromosome        | Population               |
 | ----------------- | ------------------------ |
 | ag1000g\_3L       | An. gambiae (B. Faso)    |
-| ag1000g\_3L       | An. coluzzii (B. Faso)   |
 | ag1000g\_X        | An. gambiae (B. Faso)    |
 | ag1000g\_X        | An. coluzzii (B. Faso)   |
 
